@@ -29,18 +29,18 @@ class RenderMovieDetails extends React.Component{
         auditoriums.push((
             <tr class="audi">
                     <td>{this.props.data[i].Audi}</td>
-                    <td><button> 9 AM >></button></td>
-                    <td><button> 2 PM >></button></td>
-                    <td><button> 7 PM >></button></td>
+                    <td><button onClick={(e)=>{sessionStorage.setItem("slot","1");sessionStorage.setItem("audi",this.props.data[i].Audi.substr(-1));}}> 9 AM >></button></td>
+                    <td><button onClick={(e)=>{sessionStorage.setItem("slot","2");sessionStorage.setItem("audi",this.props.data[i].Audi.substr(-1));}}> 2 PM >></button></td>
+                    <td><button onClick={(e)=>{sessionStorage.setItem("slot","3");sessionStorage.setItem("audi",this.props.data[i].Audi.substr(-1));}}> 7 PM >></button></td>
             </tr>
         ));
         return(
             <div>
             <img id="image-placeholder" src={this.props.data[0].Poster_src}></img>
             <div id="Date-Buttons">
-                <button id="d1">{weekdays[today]}</button>
-                <button id="d2">{weekdays[(today+1)%7]}</button>
-                <button id="d3">{weekdays[(today+2)%7]}</button>
+                <button id="d1" onClick={()=>{sessionStorage.setItem("day",today)}}>{weekdays[today]}</button>
+                <button id="d2" onClick={()=>{sessionStorage.setItem("day",(today+1)%7)}}>{weekdays[(today+1)%7]}</button>
+                <button id="d3" onClick={()=>{sessionStorage.setItem("day",(today+2)%7)}}>{weekdays[(today+2)%7]}</button>
             </div>
             <table id="inner">    
             {auditoriums}
