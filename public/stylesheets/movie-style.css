@@ -1,0 +1,48 @@
+
+body{
+    /*background-image: url(../resources/bg5.jpg);*/
+    /*background-image: url(https://i.ibb.co/s60L0q4/bg5.jpg);*/
+    background: url("https://res.cloudinary.com/dd6t4mafh/image/upload/v1589882834/kisspng-popcorn-discount-theater-film-cinema-movie-theatre-5ab8ef33641513.2154171515220692994099-cropped_syxirl.webp") no-repeat fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;   
+}
+/*
+#movies_table{
+    display: block;
+    border: 2px;
+    border-color: white; 
+}
+*/
+
+#outer {
+    border:2px solid white;
+    border-radius: 20px;
+    display: block;
+    width:900px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -470px;
+    margin-top: -350px;
+}
+
+.outer-tr{
+    height: 700px;
+}
+
+#movdetails{
+    vertical-align: initial;
+}
+
+#movlist{
+    border-right: 2px solid white;
+    padding:15px;
+}
+
+ul{
+    list-style: none;
+    color: tomato;
+    padding-left: 0px;     
+}

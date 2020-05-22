@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            AMBP Movies!!
+        </title>
+
+        <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+        <script type="text/babel" src="./resources/retrievemoviesandshows.js" defer ></script>
+        <script type="text/babel" src="./javascripts/movie-index.js" defer ></script>
+
+        <link rel="stylesheet" type="text/css" href="./stylesheets/movie-style.css">
+
+    </head>
+    <body>
+        <!--will be inserted by react-->
+        <table id="outer">
+            <tr class="outer-tr">
+                <td id="movlist">
+                </td>
+                <td id="movdetails">
+                    
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
