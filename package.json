@@ -1,0 +1,19 @@
+{
+  "name": "amazon_internship_project",
+  "version": "1.0.0",
+  "description": "Movie_Booking_Portal",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/Amazon_Internship_Project"
+  },
+  "author": "Pradyumna Gupta",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4"
+  }
+}

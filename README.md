@@ -1,1 +1,1 @@
-Movie Booking Portal
+Movie Booking
