@@ -20,7 +20,8 @@ body{
     border:2px solid white;
     border-radius: 20px;
     display: block;
-    width:900px;
+    min-width: 900px;
+    width:fit-content;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -45,4 +46,8 @@ ul{
     list-style: none;
     color: tomato;
     padding-left: 0px;     
+}
+
+#image-placeholder{
+    width:800px;
 }

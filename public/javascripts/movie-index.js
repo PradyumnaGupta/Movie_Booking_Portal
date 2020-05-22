@@ -4,7 +4,7 @@ const movie_details=function(event){
         if(rows[i].Movie_name===event.target.innerHTML)
         audi_array.push(rows[i]);
     }
-    ReactDOM.render(<RenderMovieDetails data={audi_array}/>,document.getElementById('movdetails'))
+    ReactDOM.render(<RenderMovieDetails data={audi_array}/>,document.getElementById('movdetails'));
 }
 
 class RenderMovies extends React.Component{
@@ -22,23 +22,30 @@ class RenderMovies extends React.Component{
 
 class RenderMovieDetails extends React.Component{
     render(){
-        return(
-            <div>
-            <div id="image-placeholder"></div>
-            <div id="Date-Buttons">
-                <button id="d1">Sun</button>
-                <button id="d2">Mon</button>
-                <button id="d3">Tue</button>
-            </div>
-            <table id="inner">
-                <tr class="audi">
-                    <td> Auditorium A</td>
+        let weekdays=new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+        let today=new Date().getDay();
+        let auditoriums=[];
+        for(let i=0;i<this.props.data.length;i++)
+        auditoriums.push((
+            <tr class="audi">
+                    <td>{this.props.data[i].Audi}</td>
                     <td><button> 9 AM >></button></td>
                     <td><button> 2 PM >></button></td>
                     <td><button> 7 PM >></button></td>
-                </tr>
-                <tr class="audi"></tr>
+            </tr>
+        ));
+        return(
+            <div>
+            <img id="image-placeholder" src={this.props.data[0].Poster_src}></img>
+            <div id="Date-Buttons">
+                <button id="d1">{weekdays[today]}</button>
+                <button id="d2">{weekdays[(today+1)%7]}</button>
+                <button id="d3">{weekdays[(today+2)%7]}</button>
+            </div>
+            <table id="inner">    
+            {auditoriums}
             </table>
+            <button id="show_select">Submit</button>
             </div>
         );
     }
