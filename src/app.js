@@ -48,12 +48,10 @@ app.get("/seat_info/",(req,res,next)=>{
     getSeats(req,query.audi,req.query.slot,req.query.day,res);
 });
 
-/*
 app.get("/submit/",(req,res,next)=>{
     submitFinalTicket(req.query,req.query.movie,req.query.audi,req.query.slot);
     res.send("OK");
 });
-*/
 
 app.listen(Port,()=>{
     console.log(`Listening at port ${Port}`);
