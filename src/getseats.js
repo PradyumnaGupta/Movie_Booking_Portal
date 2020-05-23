@@ -6,6 +6,7 @@ const getSeats=function(audi,slot,day,res){
         $slot:slot,
         $audi:audi
     },(error,seats)=>{
+        day=(day<today)?(7-today+day):(day-today);
         seats=JSON.parse(seats)[day];
         res.send(JSON.stringify(seats));
         console.log(seats);

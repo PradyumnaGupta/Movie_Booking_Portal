@@ -48,8 +48,8 @@ app.get("/seat_info/",(req,res,next)=>{
     getSeats(req,query.audi,req.query.slot,req.query.day,res);
 });
 
-app.get("/submit/",(req,res,next)=>{
-    submitFinalTicket(req.query,req.query.movie,req.query.audi,req.query.slot);
+app.get("/submit_ticket/",(req,res,next)=>{
+    submitFinalTicket(req.query.user,req.query.movie,req.query.audi,req.query.slot,req.query.day,req.query.seats,res);
     res.send("OK");
 });
 
