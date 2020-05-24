@@ -33,7 +33,7 @@ const submitFinalTicket=function(user,movie,audi,slot,day,seats,res){
                 $audi:audi
             });
             res.send("OK");
-            emailTicket();
+            emailTicket(user,seats,movie,new Array("9 AM","2 PM","7 PM")[JSON.parse(slot)],date);
         }
     });
 };
