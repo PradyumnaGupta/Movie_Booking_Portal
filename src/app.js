@@ -1,6 +1,7 @@
 const express=require('express');
 const cors = require('cors');
 const sqlite=require('sqlite3');
+//const nodemailer=require('nodemailer');
 
 const db=new sqlite.Database('../Databases/MBP.db');
 
@@ -9,6 +10,8 @@ const checkUser=require('./checkUser.js');
 const checkMatchingTickets=require('./checkmatchingtickets.js');
 const getMoviesInfo=require('./getmoviesinfo.js');
 const getSeats=require('./getseats.js');
+const submitFinalTicket=require('./submitfinalticket.js');
+const checkIfSeatsAvailable=require('./utils.js');
 
 const app=express();
 const Port=4002;

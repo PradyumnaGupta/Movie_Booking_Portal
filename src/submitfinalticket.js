@@ -33,7 +33,9 @@ const submitFinalTicket=function(user,movie,audi,slot,day,seats,res){
                 $audi:audi
             });
             res.send("OK");
-            //emailTicket();
+            emailTicket();
         }
     });
 };
+
+module.exports=submitFinalTicket;
