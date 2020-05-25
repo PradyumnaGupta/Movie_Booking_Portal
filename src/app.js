@@ -44,12 +44,12 @@ app.get("/history/",(req,res,next)=>{
 });
 
 app.get("/movies_info/",(req,res,next)=>{
-    console.log("req");
+    //console.log("req");
     getMoviesInfo(res);
 });
 
 app.get("/seat_info/",(req,res,next)=>{
-    getSeats(req,query.audi,req.query.slot,req.query.day,res);
+    getSeats(req.query.audi,req.query.slot,req.query.day,res);
 });
 
 app.get("/submit_ticket/",(req,res,next)=>{

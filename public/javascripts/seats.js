@@ -100,7 +100,7 @@ class Renderseats extends React.Component {
     }
 };
 
-//getSeats();
+getAvailableSeats();
 ReactDOM.render(<Renderseats/>,document.getElementById("body"));
 
 

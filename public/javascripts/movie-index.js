@@ -45,7 +45,7 @@ class RenderMovieDetails extends React.Component{
             <table id="inner">    
             {auditoriums}
             </table>
-            <button id="show_select">Submit</button>
+            <button id="show_select" onClick={()=>{window.location.href="./seats.htm"}}>Submit</button>
             </div>
         );
     }
