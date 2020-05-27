@@ -1,5 +1,6 @@
 const movie_details=function(event){
     let audi_array=[];
+    sessionStorage.setItem("movie",event.target.innerHTML);
     for(let i=0;i<rows.length;i++){
         if(rows[i].Movie_name===event.target.innerHTML)
         audi_array.push(rows[i]);
@@ -56,6 +57,7 @@ class RenderMovieDetails extends React.Component{
 
 retreiveMoviesAndShows();
 
+console.log(sessionStorage.getItem("movie_list"));
 const rows=JSON.parse(sessionStorage.getItem("movie_list"));
 const movies=[];
 

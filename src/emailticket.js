@@ -6,6 +6,7 @@ const emailTicket=function(user,seats,movie,slot,date){
         $user:user
     },(error,row)=>{
         let nodemailer = require('nodemailer');
+        /*
         let transporter = nodemailer.createTransport({
             host: "smtp-mail.outlook.com",
             secureConnection: false,
@@ -18,7 +19,16 @@ const emailTicket=function(user,seats,movie,slot,date){
                 pass: 'movie@123'
             }
         });
-        
+        */
+        let transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true, // use SSL
+            auth: {
+                user: 'moviebookingportal@gmail.com',
+                pass: 'movie@123'
+            }
+        });
         let mailOptions = {
             from: 'moviebookingportal@outlook.com', 
             to: row.Email, 

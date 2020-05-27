@@ -1,3 +1,4 @@
+
 class RenderLRButtons extends React.Component{
     render(){
         return (
@@ -63,11 +64,20 @@ class RenderForwardButtons extends React.Component{
     }
 };
 
-const call_auth_user=async function(event){
+const call_auth_user=function(event){
     event.preventDefault();
-    authenticateUser();
-    if(sessionStorage.getItem('authenticated')==="true"){
-        ReactDOM.render(<RenderForwardButtons/>,document.getElementById('authentication-fields'));
+    const username=document.getElementById("user").value;
+    const password=document.getElementById("pass").value;
+    if(username==="admin@amazon"&&password==="admin@123"){
+        document.getElementById("top-bar").removeChild(document.getElementById("authentication-fields"));
+        //ReactDOM.render(</>,document.getElementById("main"));
+        //add event listeners here
+    }
+    else{
+        authenticateUser();
+        if(sessionStorage.getItem('authenticated')==="true"){
+            ReactDOM.render(<RenderForwardButtons/>,document.getElementById('authentication-fields'));
+    }
     }
 }
 
@@ -104,4 +114,3 @@ const register=document.getElementById("register-button");
 
 login.addEventListener('click',loginEvent);
 register.addEventListener('click',registerEvent);
-

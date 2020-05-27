@@ -11,8 +11,8 @@ const checkMatchingTickets=require('./checkmatchingtickets.js');
 const getMoviesInfo=require('./getmoviesinfo.js');
 const getSeats=require('./getseats.js');
 const submitFinalTicket=require('./submitfinalticket.js');
-const emailTicket=require('./emailticket.js');
-const {checkIfSeatsAvailable}=require('./utils.js');
+//const emailTicket=require('./emailticket.js');
+//const checkIfSeatsAvailable=require('./utils.js');
 
 const app=express();
 const Port=4002;
@@ -44,7 +44,6 @@ app.get("/history/",(req,res,next)=>{
 });
 
 app.get("/movies_info/",(req,res,next)=>{
-    //console.log("req");
     getMoviesInfo(res);
 });
 
@@ -53,9 +52,12 @@ app.get("/seat_info/",(req,res,next)=>{
 });
 
 app.get("/submit_ticket/",(req,res,next)=>{
+    console.log(req.query);
     submitFinalTicket(req.query.user,req.query.movie,req.query.audi,req.query.slot,req.query.day,req.query.seats,res);
-    res.send("OK");
+    //res.send("OK");
 });
+
+//setInterval(()=>{setTimeout(resetSeats(),(new Date((new Date().getFullYear()),(new Date().getMonth()),(new Date().getDate()),18,30).getTime())-(new Date().getTime()))},24*60*60*60);
 
 app.listen(Port,()=>{
     console.log(`Listening at port ${Port}`);

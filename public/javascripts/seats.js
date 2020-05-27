@@ -3,23 +3,26 @@ let selected_seats=[];
 let val;
 
 const modifySeat=function(event){
-    val=JSON.parse(event.target.value);
+    val=JSON.parse(event.target.id);
     if(selected_seats.indexOf(val)!=-1)
     selected_seats.splice(selected_seats.indexOf(val),1);
     else selected_seats.push(val);
 }
 
-const on_submit=function(){
+const on_submit=function(event){
+    event.preventDefault();
     if(selected_seats.length>6){
         alert("You can't select more than 6 seats.");
         return;
     }
     else if(selected_seats.length<=0){
-        alert("Please select atleast 1 seat to book.")
+        alert("Please select atleast 1 seat to book.");
         return;
     }
     else {
-        console.log("done");
+        sendFinalTicket(selected_seats);
+        if(sessionStorage.getItem("Booked")==="true")
+        alert("Congratulations,your seats have been booked !!");
     }
 }
 
@@ -29,69 +32,69 @@ class Renderseats extends React.Component {
         <div>
             <table>
                 <tr>
-                    <td><input onClick={modifySeat} value="1" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="2" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="3" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="4" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="5" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="1" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="2" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="3" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="4" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="5" type="checkbox"></input></td>
                     <td><input type="checkbox" class="mid"></input></td>
-                    <td><input onClick={modifySeat} value="6" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="7" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="8" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="9" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="10" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="6" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="7" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="8" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="9" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="10" type="checkbox"></input></td>
                 </tr>
                 <tr>
-                    <td><input onClick={modifySeat} value="11" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="12" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="13" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="14" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="15" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="11" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="12" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="13" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="14" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="15" type="checkbox"></input></td>
                     <td><input type="checkbox" class="mid"></input></td>
-                    <td><input onClick={modifySeat} value="16" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="17" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="18" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="19" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="20" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="16" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="17" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="18" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="19" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="20" type="checkbox"></input></td>
                 </tr>
                 <tr>
-                    <td><input onClick={modifySeat} value="21" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="22" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="23" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="24" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="25" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="21" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="22" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="23" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="24" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="25" type="checkbox"></input></td>
                     <td><input type="checkbox" class="mid"></input></td>
-                    <td><input onClick={modifySeat} value="26" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="27" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="28" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="29" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="30" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="26" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="27" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="28" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="29" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="30" type="checkbox"></input></td>
                 </tr>
                 <tr>
-                    <td><input onClick={modifySeat} value="31" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="32" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="33" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="34" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="35" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="31" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="32" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="33" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="34" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="35" type="checkbox"></input></td>
                     <td><input type="checkbox" class="mid"></input></td>
-                    <td><input onClick={modifySeat} value="36" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="37" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="38" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="39" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="40" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="36" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="37" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="38" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="39" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="40" type="checkbox"></input></td>
                 </tr>
                 <tr>
-                    <td><input onClick={modifySeat} value="41" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="42" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="43" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="44" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="45" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="41" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="42" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="43" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="44" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="45" type="checkbox"></input></td>
                     <td><input type="checkbox" class="mid"></input></td>
-                    <td><input onClick={modifySeat} value="46" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="47" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="48" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="49" type="checkbox"></input></td>
-                    <td><input onClick={modifySeat} value="50" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="46" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="47" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="48" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="49" type="checkbox"></input></td>
+                    <td><input onClick={modifySeat} id="50" type="checkbox"></input></td>
                 </tr>
             </table>
             <button id="submit">Submit</button>
@@ -102,7 +105,12 @@ class Renderseats extends React.Component {
 
 getAvailableSeats();
 ReactDOM.render(<Renderseats/>,document.getElementById("body"));
-
+console.log(availableSeats);
+for(let i=1;i<=50;i++){
+    if(availableSeats.indexOf(i)===-1)
+    document.getElementById(i.toString()).disabled=true;
+}
 
 const submit_button=document.getElementById("submit");
 submit_button.addEventListener("click",on_submit);
+
