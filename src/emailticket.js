@@ -1,5 +1,5 @@
 
-const emailTicket=function(user,seats,movie,slot,date){
+const emailTicket=function(user,seats,movie,slot,audi,date){
     const sqlite=require('sqlite3');
     const db=new sqlite.Database('../Databases/MBP.db');
     db.get("SELECT * FROM users WHERE Username=$user",{
@@ -33,7 +33,7 @@ const emailTicket=function(user,seats,movie,slot,date){
             from: 'moviebookingportal@outlook.com', 
             to: row.Email, 
             subject: 'Ticket Booked', 
-            text: `Dear ${row.Username}, The details for your ticket are as follows:\n MOVIE : ${movie} \n Date: ${date} \n Time : ${slot} \n Seats : ${seats} `
+            text: `Dear ${row.Username}, The details for your ticket are as follows:\n MOVIE : ${movie} \n Auditorium:Auditorium ${audi} \n Date: ${date} \n Time : ${slot} \n Seats : ${seats} `
         };
         
         transporter.sendMail(mailOptions, function(error, info){

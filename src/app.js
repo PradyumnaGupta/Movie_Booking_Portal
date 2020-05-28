@@ -40,7 +40,7 @@ app.get("/register/",(req,res,next)=>{
 });
 
 app.get("/history/",(req,res,next)=>{
-    checkMatchingTickets(req.query.username,res);
+    checkMatchingTickets(req.query.user,res);
 });
 
 app.get("/movies_info/",(req,res,next)=>{

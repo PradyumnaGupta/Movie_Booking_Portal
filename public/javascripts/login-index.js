@@ -3,8 +3,10 @@ class RenderLRButtons extends React.Component{
     render(){
         return (
             <div id="buttons">
+            <span>Already a User ?</span>
             <button id="login-button">Login</button>
-            
+            <br></br>
+            <span>New User ?</span>
             <button id="register-button">Register</button>
             </div>
         );
@@ -15,11 +17,13 @@ class RenderLoginFields extends React.Component{
     render(){
         return (
             <div id="login-input">
+                <br></br>
+                
                 <form>
-                    <label for="user">Enter Username:</label>
+                    {/*<label for="user">Enter Username:</label>*/}
                     <input type="text" placeholder="Username" id="user"></input>
-                    <label for="pass">Enter Password:</label>
-                    <input type="password" placeholder="Password" id="pass"></input>    
+                    {/*<label for="pass">Enter Password:</label>*/}
+                    <input type="password" placeholder="Password" id="pass"></input>
                     <br></br>
                     <input type="submit" placeholder="Submit" id="submit"></input>
                 </form>
@@ -33,14 +37,14 @@ class RenderRegisterFields extends React.Component{
         return (
             <div id="register-input">
                 <form>
-                    <label for="user">Enter Username:</label>
+                    {/*<label for="user">Enter Username:</label>*/}
                     <input type="text" placeholder="Username" id="user"></input>
-                    <label for="pass">Enter Password:</label>
+                    {/*<label for="pass">Enter Password:</label>*/}
                     <input type="password" placeholder="Password" id="pass"></input>
                     <br></br>
-                    <label for="email">Enter Email:</label>
+                    {/*<label for="email">Enter Email:</label>*/}
                     <input type="text" placeholder="Email" id="email"></input>
-                    <label for="phone">Enter Phone No.:</label>
+                    {/*<label for="phone">Enter Phone No.:</label>*/}
                     <input type="text" placeholder="Phone no." id="phone"></input>
                     <br></br>
                     <input type="submit" placeholder="Submit" id="submit"></input>
@@ -56,13 +60,47 @@ class RenderForwardButtons extends React.Component{
             <div id="forward-buttons">
                 <span>Hey {sessionStorage.getItem('Username')}</span>
                 <br></br>
-                <br></br>
-                <button id="book-your-movie"><a href="movies.htm">Book Your Show >></a></button>
-                <button id="book-history">Booking History >></button>
+                <button id="book-history" onClick={getBookingHistory}>Booking History >></button>
+                <button id="book-your-movie" onClick={()=>{window.location.href="./movies.htm"}}>Book Your Show >></button>
             </div>
         );
     }
 };
+
+class RenderUserHistory extends React.Component{
+    render(){
+        let user_history=this.props.data.map((val)=>{
+            return (
+                <tr>
+                    <td>{val.Date}</td>
+                    <td>{val.MOVIE}</td>
+                    <td>{val.Audi}</td>
+                    <td>{val.Time_Slot}</td>
+                </tr>
+            )
+        });
+        return(
+            <table>
+                <thead>
+                <tr>
+                    <td>Date</td>
+                    <td>Movie</td>
+                    <td>Auditorium</td>
+                    <td>Time Slot</td>
+                </tr>
+                </thead>
+                {user_history}                
+            </table>
+        )
+    }
+};
+
+
+const getBookingHistory=function(){
+    retreiveBookingHistory();//user history set in session storage in this function.
+    let hist=JSON.parse(sessionStorage.getItem("user_history"));
+    ReactDOM.render(<RenderUserHistory data={hist}/>,document.getElementById("main"));
+}
 
 const call_auth_user=function(event){
     event.preventDefault();
@@ -70,6 +108,7 @@ const call_auth_user=function(event){
     const password=document.getElementById("pass").value;
     if(username==="admin@amazon"&&password==="admin@123"){
         document.getElementById("top-bar").removeChild(document.getElementById("authentication-fields"));
+        sessionStorage("Admin-Login","true");
         //ReactDOM.render(</>,document.getElementById("main"));
         //add event listeners here
     }
@@ -107,10 +146,17 @@ const registerEvent=function(event){
 
 //main
 
-ReactDOM.render(<RenderLRButtons/>,document.getElementById('authentication-fields'));
+if(sessionStorage.getItem("authenticated")==="true"){
+    ReactDOM.render(<RenderForwardButtons/>,document.getElementById('authentication-fields'));
+}
 
-const login=document.getElementById("login-button");
-const register=document.getElementById("register-button");
+else{
+    ReactDOM.render(<RenderLRButtons/>,document.getElementById('authentication-fields'));
+    const login=document.getElementById("login-button");
+    const register=document.getElementById("register-button");
 
-login.addEventListener('click',loginEvent);
-register.addEventListener('click',registerEvent);
+    login.addEventListener('click',loginEvent);
+    register.addEventListener('click',registerEvent);
+}
+
+

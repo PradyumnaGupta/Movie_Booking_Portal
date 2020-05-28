@@ -20,6 +20,7 @@ const on_submit=function(event){
         return;
     }
     else {
+        sessionStorage.getItem("Booked")==="false";
         sendFinalTicket(selected_seats);
         if(sessionStorage.getItem("Booked")==="true")
         alert("Congratulations,your seats have been booked !!");
@@ -29,7 +30,7 @@ const on_submit=function(event){
 class Renderseats extends React.Component {
     render(){
         return (
-        <div>
+        <div id="main">
             <table>
                 <tr>
                     <td><input onClick={modifySeat} id="1" type="checkbox"></input></td>
@@ -97,6 +98,7 @@ class Renderseats extends React.Component {
                     <td><input onClick={modifySeat} id="50" type="checkbox"></input></td>
                 </tr>
             </table>
+            <br></br>
             <button id="submit">Submit</button>
         </div>
         );

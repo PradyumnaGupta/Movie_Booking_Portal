@@ -18,24 +18,14 @@ body{
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    
+    margin:auto;
 }
 
-/*
-#top-bar{
-    display: block;
-    color: red;
-    width: 100%;
-    z-index: -1;
-}
-*/
 #authentication-fields {
     display: inline-flex;
     float:right;
-    position: relative;
     top:15px;
 }
-
 
 button{
     font-family: cursive;
@@ -52,11 +42,13 @@ button{
 }
 
 #buttons {
-    float:right;
+    text-align: right;
 }
 
-#forward-buttons button{
+#forward-buttons {
     float: right;
+    text-align: right;
+    margin-right:7px;
 }
 
 form {
@@ -77,9 +69,53 @@ input{
 }
 
 span {
-    float:right;
+    vertical-align: -50%;
     font-family: cursive;
     font-weight: 100;
     color: aqua;
     font-size: large;
 }
+
+#mid_band{
+    z-index: -2;
+    background-color: rgb(256,256,256,0.8);
+    max-width: 1200px;
+    height: 100%;
+    position:fixed;
+    min-width: 900px;
+    margin: auto;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+#mid_red_band{
+    z-index: -1;
+    background-color: maroon;
+    max-width: 1200px;
+    height: 31%;
+    position:fixed;
+    min-width: 900px;
+    margin: auto;
+    left:50%;
+    transform: translateX(-50%);
+    border-radius: 0px 0px 20px 20px;
+}
+
+#top-bar{
+    max-width: 900px;
+    margin:auto;
+
+}
+
+#main{
+    position: fixed;
+    left:50%;
+    width:900px;
+    transform: translateX(-50%);
+    top:40%;
+}
+
+/*
+#main table{
+    
+}*/

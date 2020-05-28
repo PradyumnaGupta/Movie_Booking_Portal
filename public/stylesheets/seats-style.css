@@ -14,7 +14,7 @@ body{
 }
 
 table{
-    margin: auto;
+    /*margin: auto;*/
     border: 2px solid yellow;
     width: 500px;
     text-align: center;
@@ -32,7 +32,13 @@ input{
     position: absolute;
     top: 50%;
     -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
+}
+
+#submit{
+    margin:0;
+    position: relative;
+    left:50%;
+    transform:translateX(-50%);
 }
