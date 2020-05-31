@@ -9,8 +9,8 @@ function createUser (){
         return ;
     }
 
-    const server="http://192.168.1.4:4002";//server-url
-    const endpoint=`/register/?username=${username}&password=${password}&email=${email}&phone=${phone}`;
+    const server=sessionStorage.getItem("url");//server-url
+    const endpoint=server+`/register/?username=${username}&password=${password}&email=${email}&phone=${phone}`;
     const xhr=new XMLHttpRequest();
     //xhr.responseType='json';
     xhr.onreadystatechange=()=>{

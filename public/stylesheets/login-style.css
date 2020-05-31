@@ -51,7 +51,7 @@ button{
     margin-right:7px;
 }
 
-form {
+#login-input form,#register-input form {
     float:right;
     font-size: large;
 }
@@ -110,12 +110,18 @@ span {
 #main{
     position: fixed;
     left:50%;
-    width:900px;
+    width:860px;
     transform: translateX(-50%);
-    top:40%;
+    top:30%;
+    
 }
 
-/*
+
 #main table{
-    
-}*/
+    width:-webkit-fill-available;   
+}
+
+h3 {
+    font-size: xx-large;
+    font-family: century schoolbook;
+}

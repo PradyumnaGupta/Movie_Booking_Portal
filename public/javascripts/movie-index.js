@@ -1,3 +1,5 @@
+
+
 const movie_details=function(event){
     let audi_array=[];
     sessionStorage.setItem("movie",event.target.innerHTML);
@@ -30,23 +32,24 @@ class RenderMovieDetails extends React.Component{
         auditoriums.push((
             <tr class="audi">
                     <td>{this.props.data[i].Audi}</td>
-                    <td><button onClick={(e)=>{sessionStorage.setItem("slot","1");sessionStorage.setItem("audi",this.props.data[i].Audi.substr(-1));}}> 9 AM >></button></td>
-                    <td><button onClick={(e)=>{sessionStorage.setItem("slot","2");sessionStorage.setItem("audi",this.props.data[i].Audi.substr(-1));}}> 2 PM >></button></td>
-                    <td><button onClick={(e)=>{sessionStorage.setItem("slot","3");sessionStorage.setItem("audi",this.props.data[i].Audi.substr(-1));}}> 7 PM >></button></td>
+                    <td><button onClick={(e)=>{sessionStorage.setItem("slot","1");sessionStorage.setItem("audi",this.props.data[i].Audi.substr(-1));}}> 9 AM </button></td>
+                    <td><button onClick={(e)=>{sessionStorage.setItem("slot","2");sessionStorage.setItem("audi",this.props.data[i].Audi.substr(-1));}}> 2 PM </button></td>
+                    <td><button onClick={(e)=>{sessionStorage.setItem("slot","3");sessionStorage.setItem("audi",this.props.data[i].Audi.substr(-1));}}> 7 PM </button></td>
             </tr>
         ));
         return(
             <div>
             <img id="image-placeholder" src={this.props.data[0].Poster_src}></img>
-            <div id="Date-Buttons">
-                <button id="d1" onClick={()=>{sessionStorage.setItem("day",today)}}>{weekdays[today]}</button>
-                <button id="d2" onClick={()=>{sessionStorage.setItem("day",(today+1)%7)}}>{weekdays[(today+1)%7]}</button>
-                <button id="d3" onClick={()=>{sessionStorage.setItem("day",(today+2)%7)}}>{weekdays[(today+2)%7]}</button>
-            </div>
-            <table id="inner">    
+            <select id="Date-Buttons" onChange={(e)=>{document.getElementById("inner").style.display="table";document.getElementById("show_select").style.display="block";sessionStorage.setItem("day",weekdays.indexOf(e.target.value));}}>
+                <option value="" disabled selected>Select a day</option>
+                <option id="d1" onClick={()=>{sessionStorage.setItem("day",today);}}>{weekdays[today]}</option>
+                <option id="d2" onClick={()=>{sessionStorage.setItem("day",(today+1)%7);}}>{weekdays[(today+1)%7]}</option>
+                <option id="d3" onClick={()=>{sessionStorage.setItem("day",(today+2)%7);}}>{weekdays[(today+2)%7]}</option>
+            </select>
+            <table id="inner" style={{display:"none"}}>    
             {auditoriums}
             </table>
-            <button id="show_select" onClick={()=>{window.location.href="./seats.htm"}}>Submit</button>
+            <button id="show_select" style={{display:"none"}} onClick={()=>{window.location.href="./seats.htm"}}>Submit</button>
             </div>
         );
     }
@@ -59,10 +62,12 @@ retreiveMoviesAndShows();
 
 console.log(sessionStorage.getItem("movie_list"));
 const rows=JSON.parse(sessionStorage.getItem("movie_list"));
-const movies=[];
+let movies=[];
 
 for(let i=0;i<rows.length;i++)
 movies.push(rows[i].Movie_name);
+movies=Array.from(new Set(movies));
 
 ReactDOM.render(<RenderMovies data={movies}/>,document.getElementById('movlist'));
 
+document.getElementById("logout").addEventListener('click',()=>{sessionStorage.setItem("authenticated","false");window.location.href="../login.htm";})

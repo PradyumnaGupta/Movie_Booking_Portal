@@ -1,17 +1,14 @@
 
-function retreiveMoviesAndShows(){
-
+const deleteMovie=function(movie,audi){
     const server=sessionStorage.getItem("url");//ipconfigiserver-url
-    const endpoint=server+'/movies_info/';
+    const endpoint=server+`/remove_show/?movie=${movie}&audi=${audi}`;
     const xhr=new XMLHttpRequest();
     //xhr.responseType='json';
     xhr.onreadystatechange=()=>{
         if(xhr.readyState===XMLHttpRequest.DONE){
-            let res=xhr.response;
-            //console.log(JSON.parse(res));
-            sessionStorage.setItem("movie_list",res);
+            console.log(xhr.response);
         }
     }
     xhr.open('GET',endpoint,false);
-    xhr.send();
+    xhr.send();    
 }

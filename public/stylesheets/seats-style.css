@@ -15,11 +15,12 @@ body{
 
 table{
     /*margin: auto;*/
-    border: 2px solid yellow;
+    border: 3px solid moccasin;
     width: 500px;
     text-align: center;
     height: 300px;
     border-radius: 20px;
+    background-color: rgb(256,256,256,0.5);
 }
 
 input{
@@ -41,4 +42,46 @@ input{
     position: relative;
     left:50%;
     transform:translateX(-50%);
+    min-width: 8em;
+    min-height: 2.5em;
+    font-size: medium;
+    border-radius: 5px;
+    border-color: white;
+    background-color: cornsilk;
+}
+
+#submit:hover{
+    background-color: mintcream;
+}
+
+#screen{
+    width: 500px;
+    margin: auto;
+    top: 25%;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(255, 0, 0, 0.9);
+}
+
+#screen_div{
+    width: 501px;
+    top: 20%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: x-large;
+    font-family: blackadder itc;
+}
+
+#logout{
+    text-decoration: underline;
+    color: aqua;
+    left: 94%;
+    position: absolute;
+    font-size: 1.2em;
+    cursor: pointer;
 }

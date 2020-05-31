@@ -8,13 +8,6 @@ body{
     -o-background-size: cover;
     background-size: cover;   
 }
-/*
-#movies_table{
-    display: block;
-    border: 2px;
-    border-color: white; 
-}
-*/
 
 #outer {
     border:2px solid white;
@@ -25,8 +18,8 @@ body{
     position: fixed;
     top: 50%;
     left: 50%;
-    margin-left: -470px;
-    margin-top: -350px;
+    transform:translateX(-50%) translateY(-50%);
+    background: rgb(256,256,256,0.3);
 }
 
 .outer-tr{
@@ -39,15 +32,100 @@ body{
 
 #movlist{
     border-right: 2px solid white;
-    padding:15px;
+    vertical-align: middle;
+    border-radius: 20px 0px 0px 20px;
+    background-color: maroon;
+    text-align: center;
+    width: 7em;
 }
 
 ul{
     list-style: none;
-    color: tomato;
+    color: snow;
     padding-left: 0px;     
+    font-size: 1.3em;
+}
+
+li{
+    cursor: pointer;
+    margin-bottom:3em;
+}
+
+li:hover{
+    background-color:midnightblue; 
+    box-shadow: 0px 3px 3px 0px #000000;
 }
 
 #image-placeholder{
     width:800px;
+    height:400px;
+    border-radius: 0px 15px 0px 0px;
+}
+
+#choose{
+    position: fixed;
+    top: 50%;
+    font-family: Monotype corsiva;
+    font-size: 2.8em;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    color: cornsilk;
+}
+
+#Date-Buttons{
+    border-radius:10px;
+    border:2px solid mistyrose;
+    width:150px;
+    height: 2.5em;
+    color:black;
+    display:block;
+    font-size:0.9em;
+    margin:0.8em;
+}
+
+#inner{
+    margin: 1em 0.8em;
+    border: 1px solid black;
+    height: 50px;
+    width:30em;
+    background-color: antiquewhite;
+    display: table;
+    font-size: larger;
+}
+
+#inner tr{
+    text-align: center;
+}
+
+#inner tr td button{
+    width: -webkit-fill-available;
+    height: 3em;
+    background: #ffd319;
+    border: 2px solid white;
+}
+
+#inner tr td button:hover{
+    background: #fee23e;
+}
+
+#inner tr td button:focus{
+    background: #fee23e;
+}
+
+#show_select{
+    margin-left: 0.9em;
+    width: 7em;
+    height: 2.5em;
+    border-radius: 1em;
+    font-size: medium;
+    background-color: antiquewhite;
+}
+
+#logout{
+    text-decoration: underline;
+    color: aqua;
+    left: 94%;
+    position: absolute;
+    font-size: 1.2em;
+    cursor: pointer;
 }

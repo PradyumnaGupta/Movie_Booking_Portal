@@ -1,4 +1,7 @@
 
+const url="http://e4d5f367ade3.ngrok.io";
+sessionStorage.setItem("url",url);
+
 class RenderLRButtons extends React.Component{
     render(){
         return (
@@ -18,12 +21,9 @@ class RenderLoginFields extends React.Component{
         return (
             <div id="login-input">
                 <br></br>
-                
                 <form>
-                    {/*<label for="user">Enter Username:</label>*/}
-                    <input type="text" placeholder="Username" id="user"></input>
-                    {/*<label for="pass">Enter Password:</label>*/}
-                    <input type="password" placeholder="Password" id="pass"></input>
+                    <input type="text" placeholder="Enter Username" id="user"></input>
+                    <input type="password" placeholder="Enter Password" id="pass"></input>
                     <br></br>
                     <input type="submit" placeholder="Submit" id="submit"></input>
                 </form>
@@ -37,14 +37,10 @@ class RenderRegisterFields extends React.Component{
         return (
             <div id="register-input">
                 <form>
-                    {/*<label for="user">Enter Username:</label>*/}
                     <input type="text" placeholder="Username" id="user"></input>
-                    {/*<label for="pass">Enter Password:</label>*/}
                     <input type="password" placeholder="Password" id="pass"></input>
                     <br></br>
-                    {/*<label for="email">Enter Email:</label>*/}
                     <input type="text" placeholder="Email" id="email"></input>
-                    {/*<label for="phone">Enter Phone No.:</label>*/}
                     <input type="text" placeholder="Phone no." id="phone"></input>
                     <br></br>
                     <input type="submit" placeholder="Submit" id="submit"></input>
@@ -58,7 +54,7 @@ class RenderForwardButtons extends React.Component{
     render(){
         return (
             <div id="forward-buttons">
-                <span>Hey {sessionStorage.getItem('Username')}</span>
+                <span style={{cursor:"pointer",textDecoration:"underline"}} onClick={()=>{sessionStorage.setItem("authenticated","false");window.location.reload();}}>Hey {sessionStorage.getItem('Username')}</span>
                 <br></br>
                 <button id="book-history" onClick={getBookingHistory}>Booking History >></button>
                 <button id="book-your-movie" onClick={()=>{window.location.href="./movies.htm"}}>Book Your Show >></button>
@@ -80,6 +76,9 @@ class RenderUserHistory extends React.Component{
             )
         });
         return(
+            <div>
+            <h3>Booking History</h3>   
+            
             <table>
                 <thead>
                 <tr>
@@ -91,9 +90,72 @@ class RenderUserHistory extends React.Component{
                 </thead>
                 {user_history}                
             </table>
+            </div>
         )
     }
 };
+
+class RenderAdminForm extends React.Component{
+    render(){
+        retreiveMoviesAndShows();
+        const rows=JSON.parse(sessionStorage.getItem("movie_list"));
+        const shows=rows.map((item)=>{
+            return (
+                <tr>
+                    <td>{item.Movie_name}</td>
+                    <td>{item.Audi}</td>
+                    <td><a href={item.Poster_src}>{item.Poster_src}</a></td>
+                </tr>
+            )
+        });
+        const removal=rows.map((item)=>{
+            return(
+                <option value={[item.Movie_name,item.Audi]}>{item.Audi}-{item.Movie_name}</option>
+            )
+        });
+        const adder=()=>{
+            let new_audi=document.getElementById("new_audi").value;
+            let new_movie=document.getElementById("new_movie").value;
+            let new_poster=document.getElementById("new_poster").value;
+            if(new_audi==="Add an auditorium") new_audi=document.getElementById("add_audi").value;
+            addMovie(new_movie,new_audi,new_poster);
+            ReactDOM.render(<RenderAdminForm/>,document.getElementById("main"));
+        };
+        return(
+            <div>
+                <h2>Add a Movie/Auditorium</h2>
+                <form id="add_movie">
+                    <select id="new_audi" onChange={(e)=>{if(e.target.value==="Add an auditorium") document.getElementById("add_audi").style.display="block";}}>
+                        <option>Auditorium A</option>
+                        <option>Auditorium B</option>
+                        <option>Auditorium C</option>
+                        <option>Add an auditorium</option>
+                    </select>
+                    <input type="text" style={{display:"none"}} placeholder="Enter auditorium name" id="add_audi"></input>
+                    <input type="text" id ="new_movie" placeholder="Enter movie name"></input>
+                    <input type="text" id="new_poster" placeholder="Enter poster source url"></input>
+                </form>
+                <button onClick={adder}>Submit</button>
+                <h2>Remove a Movie/Auditorium</h2>
+                <select id="remove_movie">
+                    {removal}
+                </select>
+                <button onClick={()=>{deleteMovie(document.getElementById("remove_movie").value.split(',')[0],document.getElementById("remove_movie").value.split(',')[1]);ReactDOM.render(<RenderAdminForm/>,document.getElementById("main"));}}>Submit</button>
+                <h2>Currently ongoing movies at the auditoriums:</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Movie</td>
+                            <td>Auditorium</td>
+                            <td>Poster_src</td>
+                        </tr>
+                    </thead>
+                    {shows}
+                </table>
+            </div>
+        )
+    }
+}
 
 
 const getBookingHistory=function(){
@@ -108,8 +170,8 @@ const call_auth_user=function(event){
     const password=document.getElementById("pass").value;
     if(username==="admin@amazon"&&password==="admin@123"){
         document.getElementById("top-bar").removeChild(document.getElementById("authentication-fields"));
-        sessionStorage("Admin-Login","true");
-        //ReactDOM.render(</>,document.getElementById("main"));
+        sessionStorage.setItem("Admin-Login","true");
+        ReactDOM.render(<RenderAdminForm/>,document.getElementById("main"));
         //add event listeners here
     }
     else{
@@ -158,5 +220,3 @@ else{
     login.addEventListener('click',loginEvent);
     register.addEventListener('click',registerEvent);
 }
-
-

@@ -7,8 +7,8 @@ function authenticateUser (){
         return ;
     }
 
-    const server="http://192.168.1.4:4002";//server-url
-    const endpoint=`/login/?username=${username}&password=${password}`;
+    const server=sessionStorage.getItem("url");//server-url
+    const endpoint=server+`/login/?username=${username}&password=${password}`;
     const xhr=new XMLHttpRequest();
     //xhr.responseType='json';
     xhr.onreadystatechange=()=>{

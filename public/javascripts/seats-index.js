@@ -24,6 +24,9 @@ const on_submit=function(event){
         sendFinalTicket(selected_seats);
         if(sessionStorage.getItem("Booked")==="true")
         alert("Congratulations,your seats have been booked !!");
+        else {
+            window.location.reload();
+        }
     }
 }
 
@@ -105,8 +108,10 @@ class Renderseats extends React.Component {
     }
 };
 
-getAvailableSeats();
-ReactDOM.render(<Renderseats/>,document.getElementById("body"));
+getAvailableSeats();    
+
+ReactDOM.render(<Renderseats/>,document.getElementById("main_body"));
+
 console.log(availableSeats);
 for(let i=1;i<=50;i++){
     if(availableSeats.indexOf(i)===-1)
@@ -116,3 +121,4 @@ for(let i=1;i<=50;i++){
 const submit_button=document.getElementById("submit");
 submit_button.addEventListener("click",on_submit);
 
+document.getElementById("logout").addEventListener('click',()=>{sessionStorage.setItem("authenticated","false");window.location.href="../login.htm";})

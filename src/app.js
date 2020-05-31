@@ -11,6 +11,8 @@ const checkMatchingTickets=require('./checkmatchingtickets.js');
 const getMoviesInfo=require('./getmoviesinfo.js');
 const getSeats=require('./getseats.js');
 const submitFinalTicket=require('./submitfinalticket.js');
+const removeShow=require("./removeshow");
+const addShow=require('./addshow.js');
 //const emailTicket=require('./emailticket.js');
 //const checkIfSeatsAvailable=require('./utils.js');
 
@@ -25,18 +27,11 @@ app.use(express.static("../public"));
 //app.get('/favicon.ico', (req, res) => res.status(204));
 
 app.get("/login/",(req,res,next)=>{
-    //console.log(req.query.username);
-    //console.log(req.query.password);
     checkUser(req.query.username,req.query.password,res);
 });
 
 app.get("/register/",(req,res,next)=>{
-    /*console.log(req.query.username);
-    console.log(req.query.password);
-    console.log(req.query.email);
-    console.log(req.query.phone);*/
     addUser(req.query.username,req.query.password,req.query.email,req.query.phone,res);
-    //res.send("OK");
 });
 
 app.get("/history/",(req,res,next)=>{
@@ -52,14 +47,21 @@ app.get("/seat_info/",(req,res,next)=>{
 });
 
 app.get("/submit_ticket/",(req,res,next)=>{
-    console.log(req.query);
     submitFinalTicket(req.query.user,req.query.movie,req.query.audi,req.query.slot,req.query.day,req.query.seats,res);
-    //res.send("OK");
 });
 
-//setInterval(()=>{setTimeout(resetSeats(),(new Date((new Date().getFullYear()),(new Date().getMonth()),(new Date().getDate()),18,30).getTime())-(new Date().getTime()))},24*60*60*60);
+app.get("/add_show/",(req,res,next)=>{
+    addShow(req.query.movie,req.query.audi,req.query.poster_src,res);
+});
+
+app.get("/remove_show/",(req,res,next)=>{
+    removeShow(req.query.movie,req.query.audi,res);
+});
+
+/*To reset the seats for the next day at 12 pm*/
+setTimeout(()=>{console.log("yo1")},(new Date((new Date().getFullYear()),(new Date().getMonth()),(new Date().getDate()),24,0).getTime())-(new Date().getTime()));
+setInterval(()=>{setTimeout(()=>{console.log("yo2")},(new Date((new Date().getFullYear()),(new Date().getMonth()),(new Date().getDate()),24,0).getTime())-(new Date().getTime()))},24*60*60*60);
 
 app.listen(Port,()=>{
     console.log(`Listening at port ${Port}`);
 });
-

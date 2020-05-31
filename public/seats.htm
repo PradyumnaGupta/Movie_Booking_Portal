@@ -3,19 +3,25 @@
 <head>  
     <title>Choose Seats</title>
     
-    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
-    <!--<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>-->
+    <script src="./resources/react.production.min.js" crossorigin></script>
+    <script src="./resources/react-dom.production.min.js" crossorigin></script>
     <script src="./javascripts/babel.min.js"></script>
 
     <script type="text/babel" src="./resources/getavailableseats.js" defer></script>
     <script type="text/babel" src="./resources/sendfinalticket.js" defer></script>
-    <script type="text/babel" src="./javascripts/seats.js" defer></script>
+    <script type="text/babel" src="./javascripts/seats-index.js" defer></script>
 
     <link rel="stylesheet" type="text/css" href="./stylesheets/seats-style.css">
 
 </head>
 <body id="body">
-    
+    <div>
+        <h1 id="screen_div">SCREEN</h1>
+        <hr id="screen">
+    </div>
+    <div id="main_body">
+
+    </div>
+    <span id="logout">Logout >></span>
 </body>
 </html>
