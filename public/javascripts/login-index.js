@@ -122,7 +122,7 @@ class RenderAdminForm extends React.Component{
             ReactDOM.render(<RenderAdminForm/>,document.getElementById("main"));
         };
         return(
-            <div>
+            <div id="Admin_Form">
                 <h2>Add a Movie/Auditorium</h2>
                 <form id="add_movie">
                     <select id="new_audi" onChange={(e)=>{if(e.target.value==="Add an auditorium") document.getElementById("add_audi").style.display="block";}}>
@@ -131,9 +131,11 @@ class RenderAdminForm extends React.Component{
                         <option>Auditorium C</option>
                         <option>Add an auditorium</option>
                     </select>
+                    <div id="add_movie_fields">
                     <input type="text" style={{display:"none"}} placeholder="Enter auditorium name" id="add_audi"></input>
                     <input type="text" id ="new_movie" placeholder="Enter movie name"></input>
                     <input type="text" id="new_poster" placeholder="Enter poster source url"></input>
+                    </div>
                 </form>
                 <button onClick={adder}>Submit</button>
                 <h2>Remove a Movie/Auditorium</h2>

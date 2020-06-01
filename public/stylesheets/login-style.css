@@ -125,3 +125,47 @@ h3 {
     font-size: xx-large;
     font-family: century schoolbook;
 }
+
+#remove_movie{
+    display: block;
+    margin: auto;
+    font-size: medium;
+    border-radius: 8px;
+    border: 0.1em solid black;
+}
+
+#Admin_Form{
+    text-align: center;
+}
+
+#Admin_Form button{
+    top:0.5em;
+}
+
+#Admin_Form table {
+    border-collapse: collapse;
+}
+
+#Admin_Form table thead{
+    border-bottom-style: groove;
+    font-size: larger;
+}
+
+#add_movie_fields{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#add_movie_fields input{
+    border: 0.1em solid;
+    margin-top: 1em;
+}
+
+#new_audi{
+    display: block;
+    margin: auto;
+    font-size: medium;
+    border-radius: 8px;
+    border: 0.1em solid black;
+    width: 11em;
+}
