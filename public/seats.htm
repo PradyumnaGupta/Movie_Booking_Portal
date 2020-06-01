@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>  
+    <script>
+            if(sessionStorage.getItem("authenticated")!=="true")
+            window.location.href="./login.htm";
+    </script>
+
     <title>Choose Seats</title>
     
     <script src="./resources/react.production.min.js" crossorigin></script>
@@ -15,6 +20,7 @@
 
 </head>
 <body id="body">
+    <span id="home"><< Home</span>
     <div>
         <h1 id="screen_div">SCREEN</h1>
         <hr id="screen">

@@ -1,5 +1,5 @@
 
-const url="http://e4d5f367ade3.ngrok.io";
+const url="http://1852488ddf74.ngrok.io";
 sessionStorage.setItem("url",url);
 
 class RenderLRButtons extends React.Component{
@@ -25,7 +25,7 @@ class RenderLoginFields extends React.Component{
                     <input type="text" placeholder="Enter Username" id="user"></input>
                     <input type="password" placeholder="Enter Password" id="pass"></input>
                     <br></br>
-                    <input type="submit" placeholder="Submit" id="submit"></input>
+                    <input type="submit" id="submit" value="Submit"></input>
                 </form>
             </div>
         );
@@ -79,7 +79,7 @@ class RenderUserHistory extends React.Component{
             <div>
             <h3>Booking History</h3>   
             
-            <table>
+            <table id="booking_history">
                 <thead>
                 <tr>
                     <td>Date</td>
@@ -163,24 +163,21 @@ class RenderAdminForm extends React.Component{
 const getBookingHistory=function(){
     retreiveBookingHistory();//user history set in session storage in this function.
     let hist=JSON.parse(sessionStorage.getItem("user_history"));
-    ReactDOM.render(<RenderUserHistory data={hist}/>,document.getElementById("main"));
+    ReactDOM.render(<RenderUserHistory data={hist}/>,document.getElementById("main"));  
 }
 
 const call_auth_user=function(event){
     event.preventDefault();
-    const username=document.getElementById("user").value;
-    const password=document.getElementById("pass").value;
-    if(username==="admin@amazon"&&password==="admin@123"){
+    sessionStorage.setItem("Admin-Login","false");
+    authenticateUser();
+    if(sessionStorage.getItem("Admin-Login")==="true"){
         document.getElementById("top-bar").removeChild(document.getElementById("authentication-fields"));
-        sessionStorage.setItem("Admin-Login","true");
         ReactDOM.render(<RenderAdminForm/>,document.getElementById("main"));
-        //add event listeners here
     }
     else{
-        authenticateUser();
         if(sessionStorage.getItem('authenticated')==="true"){
             ReactDOM.render(<RenderForwardButtons/>,document.getElementById('authentication-fields'));
-    }
+        }
     }
 }
 
@@ -222,3 +219,17 @@ else{
     login.addEventListener('click',loginEvent);
     register.addEventListener('click',registerEvent);
 }
+
+//slideshow
+
+let pic_index=0;
+setInterval(()=>{
+    pic_index=(pic_index+1)%3;
+    for(let i=0;i<3;i++){
+        if(i===pic_index)
+        continue;
+        else
+        document.getElementById(`mySlides_fade ${i+1}`).style.display="none";
+    }
+    document.getElementById(`mySlides_fade ${pic_index+1}`).style.display="block";
+},2000);

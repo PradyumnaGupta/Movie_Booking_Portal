@@ -122,3 +122,4 @@ const submit_button=document.getElementById("submit");
 submit_button.addEventListener("click",on_submit);
 
 document.getElementById("logout").addEventListener('click',()=>{sessionStorage.setItem("authenticated","false");window.location.href="../login.htm";})
+document.getElementById("home").addEventListener('click',()=>{window.location.href="../login.htm";})

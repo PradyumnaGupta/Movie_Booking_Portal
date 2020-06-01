@@ -14,10 +14,13 @@ function authenticateUser (){
     xhr.onreadystatechange=()=>{
         if(xhr.readyState===XMLHttpRequest.DONE){
             let res=xhr.response;
-            
             if(!res){
                 alert("There is no account linked to that username and password");
                 return ;
+            }
+            else if(res==="Admin"){
+                sessionStorage.setItem("Admin-Login","true");
+                return;
             }
             else res=JSON.parse(res);
 

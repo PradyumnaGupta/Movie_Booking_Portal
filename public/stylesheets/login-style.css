@@ -1,5 +1,5 @@
 h1 {
-    color:brown ;
+    color:aliceblue ;
     font-weight: bold;
     display: inline-block;
     position: relative;
@@ -119,6 +119,7 @@ span {
 
 #main table{
     width:-webkit-fill-available;   
+    width:-moz-available;
 }
 
 h3 {
@@ -169,3 +170,39 @@ h3 {
     border: 0.1em solid black;
     width: 11em;
 }
+
+#booking_history {
+    border-collapse: collapse;
+}
+
+#booking_history thead tr {
+    border-bottom: 0.2em inset darkgrey;
+    font-size: larger;
+    font-style: italic;
+}
+
+.slideshow-container img{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50%;
+    display: block;
+    margin-top: 5%;
+    width: 53em;
+    height: 30em;
+    transition:0.6s ease;
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }
+  
+  @keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }

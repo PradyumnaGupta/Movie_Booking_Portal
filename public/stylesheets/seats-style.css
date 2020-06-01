@@ -85,3 +85,12 @@ input{
     font-size: 1.2em;
     cursor: pointer;
 }
+
+#home{
+    text-decoration: underline;
+    color: aqua;
+    left: 1%;
+    position: absolute;
+    font-size: 1.2em;
+    cursor: pointer;
+}
