@@ -20,10 +20,12 @@ const on_submit=function(event){
         return;
     }
     else {
-        sessionStorage.getItem("Booked")==="false";
+        sessionStorage.setItem("Booked","false");
         sendFinalTicket(selected_seats);
-        if(sessionStorage.getItem("Booked")==="true")
-        alert("Congratulations,your seats have been booked !!");
+        if(sessionStorage.getItem("Booked")==="true"){
+            alert("Congratulations,your seats have been booked !! Please check your mail for the ticket.");
+            window.location.reload();
+        }
         else {
             window.location.reload();
         }

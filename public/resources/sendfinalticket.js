@@ -7,10 +7,15 @@ const sendFinalTicket=function(seats){
     xhr.onreadystatechange=()=>{
         if(xhr.readyState===XMLHttpRequest.DONE){
             console.log(xhr.response);
-            if(xhr.response==="SEATS NOT FOUND")
-            alert("Sorry these sets were booked just now. Please reload the page and select seats again !!");
-            else 
-            sessionStorage.setItem("Booked","true");
+            if(xhr.response==="SEATS NOT FOUND"){
+                alert("Sorry these sets were booked just now. Please select seats again !!");
+                sessionStorage.setItem("Booked","false");
+                return;
+            }
+            else {
+                sessionStorage.setItem("Booked","true");
+            }
+            return;
         }
     }
     xhr.open('GET',endpoint,false);
