@@ -1,5 +1,5 @@
 
-const url="http://1852488ddf74.ngrok.io";
+const url="http://9d0938ffde0b.ngrok.io";
 sessionStorage.setItem("url",url);
 
 class RenderLRButtons extends React.Component{
@@ -25,7 +25,8 @@ class RenderLoginFields extends React.Component{
                     <input type="text" placeholder="Enter Username" id="user"></input>
                     <input type="password" placeholder="Enter Password" id="pass"></input>
                     <br></br>
-                    <input type="submit" id="submit" value="Submit"></input>
+                    <input type="submit" id="submit" value="Submit" class="submit"></input>
+                    <input type="submit" id="back" value="Back" class="submit" onClick={()=>{event.preventDefault();window.location.reload()}}></input>
                 </form>
             </div>
         );
@@ -43,7 +44,8 @@ class RenderRegisterFields extends React.Component{
                     <input type="text" placeholder="Email" id="email"></input>
                     <input type="text" placeholder="Phone no." id="phone"></input>
                     <br></br>
-                    <input type="submit" placeholder="Submit" id="submit"></input>
+                    <input type="submit" placeholder="Submit" id="submit" class="submit"></input>
+                    <input type="submit" id="back" value="Back" class="submit" onClick={()=>{event.preventDefault();window.location.reload()}}></input>
                 </form>
             </div>
         );
@@ -69,9 +71,10 @@ class RenderUserHistory extends React.Component{
             return (
                 <tr>
                     <td>{val.Date}</td>
-                    <td>{val.MOVIE}</td>
+                    <td>{val.Movie}</td>
                     <td>{val.Audi}</td>
-                    <td>{val.Time_Slot}</td>
+                    <td>{val.Slot}</td>
+                    <td>{val.Seats.join(',')}</td>
                 </tr>
             )
         });
@@ -86,9 +89,10 @@ class RenderUserHistory extends React.Component{
                     <td>Movie</td>
                     <td>Auditorium</td>
                     <td>Time Slot</td>
+                    <td>Seats</td>
                 </tr>
                 </thead>
-                {user_history}                
+                {user_history}       
             </table>
             </div>
         )

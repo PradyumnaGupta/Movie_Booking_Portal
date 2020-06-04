@@ -61,7 +61,7 @@ input{
     margin:5px;
 }
 
-#submit{
+.submit{
     float:right;
     border-radius:15px;
     font-size: large;
@@ -190,11 +190,11 @@ h3 {
     margin-top: 5%;
     width: 53em;
     height: 30em;
-    transition:0.6s ease;
+    transition:0.6s ease-in-out;
     -webkit-animation-name: fade;
-    -webkit-animation-duration: 1.5s;
+    -webkit-animation-duration: .5s;
     animation-name: fade;
-    animation-duration: 1.5s;
+    animation-duration: .5s;
 }
 
 @-webkit-keyframes fade {

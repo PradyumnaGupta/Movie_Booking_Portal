@@ -6,20 +6,6 @@ const emailTicket=function(user,seats,movie,slot,audi,date){
         $user:user
     },(error,row)=>{
         let nodemailer = require('nodemailer');
-        /*
-        let transporter = nodemailer.createTransport({
-            host: "smtp-mail.outlook.com",
-            secureConnection: false,
-            port: 587,
-            tls: {
-               ciphers:'SSLv3'
-            },
-            auth: {
-                user: 'moviebookingportal@outlook.com',
-                pass: 'movie@123'
-            }
-        });
-        */
         let transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
             port: 465,
@@ -29,19 +15,21 @@ const emailTicket=function(user,seats,movie,slot,audi,date){
                 pass: 'movie@123'
             }
         });
+        process.stdout.write("sending mail...");
         let mailOptions = {
             from: 'moviebookingportal@outlook.com', 
             to: row.Email, 
             subject: 'Ticket Booked', 
             text: `Dear ${row.Username}, The details for your ticket are as follows:\n MOVIE : ${movie} \n Auditorium:Auditorium ${audi} \n Date: ${date} \n Time : ${slot} \n Seats : ${seats} `
         };
-        
         transporter.sendMail(mailOptions, function(error, info){
             if(error){
                 console.log("An Error occured while sending mail!!");
+                console.log(error);
             }
             return;
         });
+        console.log("done");
     })
 };
 

@@ -28,6 +28,10 @@ input{
     height:17px;
 }
 
+input:disabled{
+    opacity: 35%;
+}
+
 #main{
     margin: 0;
     position: absolute;
