@@ -58,7 +58,7 @@ app.get("/remove_show/",(req,res,next)=>{
     removeShow(req.query.movie,req.query.audi,res);
 });
 
-/*To reset the seats for the next day at 12 pm*/
+
 //setTimeout(()=>{console.log("test1")},(new Date((new Date().getFullYear()),(new Date().getMonth()),(new Date().getDate()),24,0).getTime())-(new Date().getTime()));
 //setInterval(()=>{setTimeout(()=>{console.log("test2")},(new Date((new Date().getFullYear()),(new Date().getMonth()),(new Date().getDate()),24,0).getTime())-(new Date().getTime()))},24*60*60*60);
 

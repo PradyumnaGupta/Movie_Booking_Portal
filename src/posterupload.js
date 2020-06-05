@@ -20,8 +20,6 @@ const posterUpload=function(url){
     download(url, input_name, function(){
         webp.cwebp(input_name,output_name,"-q 80",function(status,error)
         {
-        //if conversion successful status will be '100'
-        //if conversion fails status will be '101'
         console.log(status);	
         console.log(error);
 

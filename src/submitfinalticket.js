@@ -50,15 +50,6 @@ const submitFinalTicket=function(user,movie,audi,slot,day,seats,res){
                 }
             });
             
-            /*
-            db.run("INSERT INTO booked_tickets VALUES($user,$date,$movie,$slot,$audi)",{
-                $user:user,
-                $date:date,
-                $movie:movie,
-                $slot:new Array("9 AM","2 PM","7 PM")[JSON.parse(slot)-1],
-                $audi:audi
-            });
-            */
             res.send("OK");
 
             emailTicket(user,seats,movie,new Array("9 AM","2 PM","7 PM")[JSON.parse(slot)-1],audi,date);
@@ -66,12 +57,5 @@ const submitFinalTicket=function(user,movie,audi,slot,day,seats,res){
     });
 };
 
-/*
-0|Username|TEXT|0||0
-1|Date|TEXT|0||0
-2|MOVIE|TEXT|0||0
-3|Time_Slot|TEXT|0||0
-4|Audi|TEXT|0||0
-*/
 
 module.exports=submitFinalTicket;

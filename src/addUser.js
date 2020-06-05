@@ -19,4 +19,3 @@ const addUser=function(user,pass,email,phone,res) {
 };
 
 module.exports=addUser;
-//export default addUser;

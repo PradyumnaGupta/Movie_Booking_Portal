@@ -9,7 +9,7 @@ const emailTicket=function(user,seats,movie,slot,audi,date){
         let transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
             port: 465,
-            secure: true, // use SSL
+            secure: true,
             auth: {
                 user: 'moviebookingportal@gmail.com',
                 pass: 'movie@123'
