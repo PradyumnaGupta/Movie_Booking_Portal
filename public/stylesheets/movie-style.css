@@ -17,7 +17,7 @@ body{
 
 #main{
     position: fixed;
-    width: 75em;/*70*/
+    width: 66em;/*70*//*76*/
     height: 100%;
     z-index: -2;
     left: 50%;
@@ -27,6 +27,7 @@ body{
     border-right: 2px solid white;
     overflow-y: scroll;
     overflow: -moz-scrollbars-none;
+    /*scrollbar-width:none;*/
 }
 
 #main::-webkit-scrollbar{
@@ -156,8 +157,8 @@ body{
 }
 
 #movies_list img{
-    width: 23em;
-    height: 14em;
+    width: 29em;/*23em*/
+    height: 16em;/*14em*/
     padding:1em;
     padding-left: 0; 
 }
@@ -165,6 +166,7 @@ body{
 .movie{
     display: inline-grid;/*flex*/
     align-items: center;
+    width:30em;
 }
 
 #Date-Buttons{
@@ -179,10 +181,10 @@ body{
 }
 
 .inner{
-    margin: 1em 0.8em;
+    margin: 1em 0.1em;
     border: 1px solid black;
     height: 2.5em ;
-    width:18em;/*27em*/
+    width:23em;/*27em*//*18em*/
     background-color: antiquewhite;
     display: table;
     font-size: larger;

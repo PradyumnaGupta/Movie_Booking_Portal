@@ -1,33 +1,28 @@
 
-function showSlides(n) {
-    const slides=document.querySelectorAll(".mySlides");
-    const dots=document.querySelectorAll(".dot");
-    slides.forEach((val) => {
-        val.style.display="none";
-    });
-    dots.forEach((val)=>{
-        val.className = val.className.replace(" active", "");
-    });
-    
-    slides[slideIndex].style.display = "block";
-    dots[slideIndex].className += " active";
-
-    slideIndex=(slideIndex+1)%movie_posters.length;
-
-    setTimeout(showSlides,2000);
-}
-
-const movie_details=function(event){
-    let audi_array=[];
-    //sessionStorage.setItem("movie",event.currentTarget.value);
-    for(let i=0;i<rows.length;i++){
-        if(rows[i].Movie_name===event.currentTarget.value)
-        audi_array.push(rows[i]);
-    }
-    ReactDOM.render(<RenderMovieDetails data={audi_array} movie={event.currentTarget.value}/>,document.getElementById(`showdetails_${event.currentTarget.value}`));
-}
-
 class RenderMovieSlideShow extends React.Component{
+    static slideIndex=1;
+
+    static showSlides(n) {
+        const slides=document.querySelectorAll(".mySlides");
+        const dots=document.querySelectorAll(".dot");
+        slides.forEach((val) => {
+            val.style.display="none";
+        });
+        dots.forEach((val)=>{
+            val.className = val.className.replace(" active", "");
+        });
+        slides[RenderMovieSlideShow.slideIndex].style.display = "block";
+        dots[RenderMovieSlideShow.slideIndex].className += " active";
+        
+        RenderMovieSlideShow.slideIndex=(RenderMovieSlideShow.slideIndex+1)%movie_posters.length;
+
+        setTimeout(RenderMovieSlideShow.showSlides,1700);
+    }
+
+    moveSlide(e) {
+        this.showSlides(slideIndex = e.target.id);
+    }
+
     render(){
         let slides=this.props.data.map((val,index)=>{
             return (
@@ -38,7 +33,7 @@ class RenderMovieSlideShow extends React.Component{
                 </div>
             )
         });
-        let dots=this.props.data.map((_,index)=>{return (<span id={index} class="dot" onClick={moveSlide}></span>)});
+        let dots=this.props.data.map((_,index)=>{return (<span id={index} class="dot" onClick={this.moveSlide}></span>)});
         return (
             <div>
                 {slides}
@@ -54,12 +49,22 @@ class RenderMovieSlideShow extends React.Component{
 
 
 class RenderMovies extends React.Component{
+
+    movie_details=function(event){
+        let audi_array=[];
+        for(let i=0;i<rows.length;i++){
+            if(rows[i].Movie_name===event.currentTarget.value)
+            audi_array.push(rows[i]);
+        }
+        ReactDOM.render(<RenderMovieDetails data={audi_array} movie={event.currentTarget.value}/>,document.getElementById(`showdetails_${event.currentTarget.value}`));
+    }
+
     render(){
         let movieList=this.props.data[0].map((val,index)=>{
             return(
             <div class="movie">
                 <img src={this.props.data[1][index]}></img>
-                <div id={`showdetails_${val}`}><button class="button" onClick={movie_details} value={val}><span>{val}</span></button></div>
+                <div id={`showdetails_${val}`}><button class="button" onClick={this.movie_details} value={val}><span>{val}</span></button></div>
             </div>
             );
         });
@@ -75,7 +80,7 @@ class RenderMovies extends React.Component{
 
 class RenderMovieDetails extends React.Component{
     activateSlot=function(e){
-        let current_time=new Date();
+         let current_time=new Date();
         if(parseInt(sessionStorage.getItem("day"))===parseInt(current_time.getDay())){
             if(parseInt(current_time.getHours())>9)
             document.querySelectorAll(".A").forEach(val=>{val.disabled=true});
@@ -138,18 +143,8 @@ movies=Array.from(new Set(movies));
 movie_posters=Array.from(new Set(movie_posters));
 
 ReactDOM.render(<RenderMovieSlideShow data={movie_posters}/>,document.getElementById("slideshow_container"));
+RenderMovieSlideShow.showSlides();
 ReactDOM.render(<RenderMovies data={[movies,movie_posters,rows]}/>,document.getElementById("movies_list"));
 
 document.getElementById("logout").addEventListener('click',()=>{sessionStorage.setItem("authenticated","false");window.location.href="../login.htm";})
 document.getElementById("home").addEventListener('click',()=>{window.location.href="../login.htm";})
-
-
-//slideshow 
-
-function moveSlide(e) {
-    showSlides(slideIndex = e.target.id);
-}
-
-let slideIndex = 1;
-showSlides(slideIndex);
-

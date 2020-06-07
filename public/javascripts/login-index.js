@@ -1,8 +1,24 @@
 
-const url="http://989d5db1b596.ngrok.io";
+const url="http://7da2113acb24.ngrok.io";
 sessionStorage.setItem("url",url);
 
 class RenderLRButtons extends React.Component{
+    static loginEvent=function(event) {
+        console.log("yo");
+        event.preventDefault();
+        ReactDOM.render(<RenderLoginFields/>,document.getElementById('authentication-fields'));
+        const login_submit=document.getElementById('submit');
+        sessionStorage.setItem("authenticated","false");
+        login_submit.addEventListener('click',RenderLoginFields.call_auth_user);
+    }
+
+    static registerEvent=function(event){
+        event.preventDefault();
+        ReactDOM.render(<RenderRegisterFields/>,document.getElementById('authentication-fields'));
+        const register_submit=document.getElementById('submit');
+        sessionStorage.setItem('authenticated',"false");
+        register_submit.addEventListener('click',RenderRegisterFields.call_create_user);
+    }
     render(){
         return (
             <div id="buttons">
@@ -17,6 +33,21 @@ class RenderLRButtons extends React.Component{
 };
 
 class RenderLoginFields extends React.Component{
+    static call_auth_user=function(event){
+        event.preventDefault();
+        sessionStorage.setItem("Admin-Login","false");
+        authenticateUser();
+        if(sessionStorage.getItem("Admin-Login")==="true"){
+            document.getElementById("top-bar").removeChild(document.getElementById("authentication-fields"));        
+            ReactDOM.render(<RenderAdminForm/>,document.getElementById("main"));
+        }
+        else{
+            if(sessionStorage.getItem('authenticated')==="true"){
+                ReactDOM.render(<RenderForwardButtons/>,document.getElementById('authentication-fields'));
+            }
+        }
+    }
+    
     render(){
         return (
             <div id="login-input">
@@ -26,7 +57,7 @@ class RenderLoginFields extends React.Component{
                     <input type="password" placeholder="Enter Password" id="pass"></input>
                     <br></br>
                     <input type="submit" id="submit" value="Submit" class="submit"></input>
-                    <input type="submit" id="back" value="Back" class="submit" onClick={()=>{event.preventDefault();window.location.reload()}}></input>
+                    <input type="submit" id="back" value="Back" class="submit" onClick={()=>{event.preventDefault();window.location.reload();}}></input>
                 </form>
             </div>
         );
@@ -34,6 +65,13 @@ class RenderLoginFields extends React.Component{
 };
 
 class RenderRegisterFields extends React.Component{
+    static call_create_user=function(event){
+        event.preventDefault();
+        createUser();
+        if(sessionStorage.getItem('authenticated')==="true"){
+            ReactDOM.render(<RenderForwardButtons/>,document.getElementById('authentication-fields'));
+        }
+    }
     render(){
         return (
             <div id="register-input">
@@ -45,7 +83,7 @@ class RenderRegisterFields extends React.Component{
                     <input type="text" placeholder="Phone no." id="phone"></input>
                     <br></br>
                     <input type="submit" placeholder="Submit" id="submit" class="submit"></input>
-                    <input type="submit" id="back" value="Back" class="submit" onClick={()=>{event.preventDefault();window.location.reload()}}></input>
+                    <input type="submit" id="back" value="Back" class="submit" onClick={()=>{event.preventDefault();window.location.reload();}}></input>
                 </form>
             </div>
         );
@@ -58,7 +96,7 @@ class RenderForwardButtons extends React.Component{
             <div id="forward-buttons">
                 <span style={{cursor:"pointer",textDecoration:"underline"}} onClick={()=>{sessionStorage.setItem("authenticated","false");window.location.reload();}}>Hey {sessionStorage.getItem('Username')}</span>
                 <br></br>
-                <button id="book-history" onClick={getBookingHistory}>Booking History >></button>
+                <button id="book-history" onClick={RenderUserHistory.getBookingHistory}>Booking History >></button>
                 <button id="book-your-movie" onClick={()=>{window.location.href="./movies.htm"}}>Book Your Show >></button>
             </div>
         );
@@ -66,6 +104,12 @@ class RenderForwardButtons extends React.Component{
 };
 
 class RenderUserHistory extends React.Component{
+    static getBookingHistory=function(){
+        retreiveBookingHistory();//user history set in session storage in this function.
+        let hist=JSON.parse(sessionStorage.getItem("user_history"));
+        ReactDOM.render(<RenderUserHistory data={hist}/>,document.getElementById("main"));  
+    }
+
     render(){
         const user_history=this.props.data.slice(0).reverse().map((val)=>{
             return (
@@ -156,6 +200,8 @@ class RenderAdminForm extends React.Component{
             addMovie(new_movie,new_audi,new_poster);
             ReactDOM.render(<RenderAdminForm/>,document.getElementById("main"));
         };
+        document.getElementById("logout").style.display="block";
+        document.getElementById("logout").addEventListener('click',()=>{window.location.reload();});
         return(
             <div id="Admin_Form">
                 <h2>Add a Movie/Auditorium</h2>
@@ -194,52 +240,6 @@ class RenderAdminForm extends React.Component{
     }
 }
 
-
-const getBookingHistory=function(){
-    retreiveBookingHistory();//user history set in session storage in this function.
-    let hist=JSON.parse(sessionStorage.getItem("user_history"));
-    ReactDOM.render(<RenderUserHistory data={hist}/>,document.getElementById("main"));  
-}
-
-const call_auth_user=function(event){
-    event.preventDefault();
-    sessionStorage.setItem("Admin-Login","false");
-    authenticateUser();
-    if(sessionStorage.getItem("Admin-Login")==="true"){
-        document.getElementById("top-bar").removeChild(document.getElementById("authentication-fields"));
-        ReactDOM.render(<RenderAdminForm/>,document.getElementById("main"));
-    }
-    else{
-        if(sessionStorage.getItem('authenticated')==="true"){
-            ReactDOM.render(<RenderForwardButtons/>,document.getElementById('authentication-fields'));
-        }
-    }
-}
-
-const call_create_user=function(event){
-    event.preventDefault();
-    createUser();
-    if(sessionStorage.getItem('authenticated')==="true"){
-        ReactDOM.render(<RenderForwardButtons/>,document.getElementById('authentication-fields'));
-    }
-}
-
-const loginEvent=function(event) {
-    event.preventDefault();
-    ReactDOM.render(<RenderLoginFields/>,document.getElementById('authentication-fields'));
-    const login_submit=document.getElementById('submit');
-    sessionStorage.setItem("authenticated","false");
-    login_submit.addEventListener('click',call_auth_user);
-}
-
-const registerEvent=function(event){
-    event.preventDefault();
-    ReactDOM.render(<RenderRegisterFields/>,document.getElementById('authentication-fields'));
-    const register_submit=document.getElementById('submit');
-    sessionStorage.setItem('authenticated',"false");
-    register_submit.addEventListener('click',call_create_user);
-}
-
 //main
 
 if(sessionStorage.getItem("authenticated")==="true"){
@@ -248,12 +248,14 @@ if(sessionStorage.getItem("authenticated")==="true"){
 
 else{
     ReactDOM.render(<RenderLRButtons/>,document.getElementById('authentication-fields'));
+    
     const login=document.getElementById("login-button");
     const register=document.getElementById("register-button");
 
-    login.addEventListener('click',loginEvent);
-    register.addEventListener('click',registerEvent);
+    login.addEventListener('click',RenderLRButtons.loginEvent);
+    register.addEventListener('click',RenderLRButtons.registerEvent);
 }
+
 
 //slideshow
 

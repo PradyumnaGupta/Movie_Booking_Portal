@@ -236,3 +236,14 @@ h4{
     font-family: cursive;
 }
 
+#logout{
+    text-decoration: underline;
+    color: aqua;
+    left: 94%;
+    position: absolute;
+    font-size: 1.2em;
+    cursor: pointer;
+    font-family:'Times New Roman';
+    display: none;
+    top:0px;
+}
