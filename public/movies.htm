@@ -5,10 +5,10 @@
             AMBP Movies!!
         </title>
 
-        <script>
+        <!--<script>
             if(sessionStorage.getItem("authenticated")!=="true")
             window.location.href="./login.htm";
-        </script>
+        </script>-->
 
         <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
@@ -22,17 +22,14 @@
     </head>
     <body>
         <span id="home"><< Home</span>
-        <table id="outer">
-            <tr class="outer-tr">
-                <td id="movlist">
-                    <!--will be inserted by react-->
-                </td>
-                <td id="movdetails">
-                    <div id="choose">Choose your movie</div>
-                    <!--will be inserted by react-->
-                </td>
-            </tr>
-        </table>
+        <div id="main">
+            <div id="slideshow_container">
+                
+            </div>
+            <div id="movies_list">
+                
+            </div>
+        </div>
         <span id="logout">Logout >></span>
     </body>
 </html>

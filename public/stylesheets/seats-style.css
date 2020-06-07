@@ -98,3 +98,23 @@ input:disabled{
     font-size: 1.2em;
     cursor: pointer;
 }
+
+#message_placeholder{
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+    top: 78%;
+    background-color: rgb(256,256,256,0.8);
+    height: 5em;
+    border-radius: 1em;
+    border: 0.1em solid moccasin;
+    display:none;
+}
+
+#message{
+    vertical-align: middle;
+    top: 46%;
+    position: relative;
+    transform: translateY(-50%);
+    margin: 0px 10px;
+}

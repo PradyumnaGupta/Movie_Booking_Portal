@@ -1,5 +1,5 @@
 
-const url="http://54250c7ea59a.ngrok.io";
+const url="http://989d5db1b596.ngrok.io";
 sessionStorage.setItem("url",url);
 
 class RenderLRButtons extends React.Component{
@@ -67,7 +67,7 @@ class RenderForwardButtons extends React.Component{
 
 class RenderUserHistory extends React.Component{
     render(){
-        let user_history=this.props.data.map((val)=>{
+        const user_history=this.props.data.slice(0).reverse().map((val)=>{
             return (
                 <tr>
                     <td>{val.Date}</td>
@@ -78,10 +78,39 @@ class RenderUserHistory extends React.Component{
                 </tr>
             )
         });
+
+        const recent_user_history=this.props.data.slice(0).reverse().reduce((recent,val)=>{
+            if(val.Date.split('-')[1]===(new Date().getMonth()+1).toString())
+            recent.push((
+                <tr>
+                    <td>{val.Date}</td>
+                    <td>{val.Movie}</td>
+                    <td>{val.Audi}</td>
+                    <td>{val.Slot}</td>
+                    <td>{val.Seats.join(',')}</td>
+                </tr>                
+            ));
+            return recent;
+        },[]);
+
+        if(!user_history.length){
+            user_history.push((<tr class="no_history"><td colspan="5">Hmmm.... it's so lonely here. Looks like you haven't booked any movie in a while. Click on the button above and choose your show right away !!!</td></tr>));
+            recent_user_history.push((<tr class="no_history"><td colspan="5">Hmmm.... it's so lonely here. Looks like you haven't booked any movie in a while. Click on the button above and choose your show right away !!!</td></tr>));
+         } else if (!recent_user_history.length) recent_user_history.push((<tr class="no_history"><td colspan="5">Hmmm.... it's so lonely here. Looks like you haven't booked any movie in a while. Click on the button above and choose your show right away !!!</td></tr>));
+        
+        const highlightactive=(id)=>{
+            document.querySelectorAll('h4').forEach((val)=>{val.style.color="grey"});
+            document.getElementById(id).style.color="black";
+        }
+
         return(
             <div>
             <h3>Booking History</h3>   
-            
+            <div id="history_tabs">
+            <h4 id="recent" class="tab" onClick={(e)=>{ReactDOM.render(recent_user_history,document.getElementById("list"));highlightactive(e.target.id)}}>Recent Bookings</h4>
+            <h4 id="past" class="tab" onClick={(e)=>{ReactDOM.render(user_history,document.getElementById("list"));highlightactive(e.target.id)}}>Past Bookings</h4>
+            </div>
+            <hr></hr>
             <table id="booking_history">
                 <thead>
                 <tr>
@@ -92,7 +121,9 @@ class RenderUserHistory extends React.Component{
                     <td>Seats</td>
                 </tr>
                 </thead>
-                {user_history}       
+                <tbody id="list">
+                    {recent_user_history}
+                </tbody>
             </table>
             </div>
         )

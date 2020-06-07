@@ -6,7 +6,9 @@ const checkMatchingTickets=function(user,res){
     (error,rows)=>{
         if(error)
         console.log(error);
+        if(rows)
         res.send(rows.Ticket_Details);
+        else res.send("[]");
     });
 };
 

@@ -173,6 +173,7 @@ h3 {
 
 #booking_history {
     border-collapse: collapse;
+    margin-top: -1.4em;
 }
 
 #booking_history thead tr {
@@ -206,3 +207,32 @@ h3 {
     from {opacity: .4}
     to {opacity: 1}
   }
+
+hr{
+    position: relative;
+    top: -2em;
+}  
+
+#history_tabs{
+    display: flex;
+    font-size: 1.4em;
+    font-family: sans-serif;
+    margin-top: -2em;
+}
+
+h4{
+    margin-right: 1em;
+    color: grey;
+}
+
+#recent{
+    color: black;
+}
+
+.no_history{
+    position: absolute;
+    padding-top: 2em;
+    font-size: 1.1em;
+    font-family: cursive;
+}
+
