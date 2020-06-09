@@ -38,38 +38,38 @@ class RenderSeats extends React.Component {
             return;
         }
         else {
+            event.target.disabled=true;
             sessionStorage.setItem("Booked","false");
             sendFinalTicket(RenderSeats.selected_seats);
             if(sessionStorage.getItem("Booked")==="true"){
                 ReactDOM.render(<RenderMessage message="Congratulations,your seats have been booked !! Please check your mail for the ticket." color="black"/>,document.getElementById("message_placeholder"));
-                retrieveAvailableSeats();
-                ReactDOM.render(<RenderSeats/>,document.getElementById("main_body"));
-                RenderSeats.hideBookedSeats();
-                RenderSeats.selected_seats=[];
             }
             else {
-                window.location.reload();
+                ReactDOM.render(<RenderMessage message="Sorry these sets were booked just now. Please select seats again !!" color="black"/>,document.getElementById("message_placeholder"));
             }
+            retrieveAvailableSeats();
+            ReactDOM.render(<RenderSeats/>,document.getElementById("main_body"));
+            RenderSeats.hideBookedSeats();
+            RenderSeats.selected_seats=[];
+            event.target.disabled=false;
         }
     }
 
     render(){
         const seatmatrix=[];
         const n_rows=5;
+        const n_columns=10;
         for(let i=0;i<n_rows;i++) {
+            let seatrow=[];
+            for(let j=1;j<=n_columns;j++){
+                seatrow.push((<td><input onClick={this.modifySeat} id={10*i+j} type="checkbox"></input></td>));
+
+                if(j===(n_columns/2))
+                seatrow.push((<td><input type="checkbox" class="mid"></input></td>));
+            }
             seatmatrix.push((
                 <tr>
-                    <td><input onClick={this.modifySeat} id={10*i+1} type="checkbox"></input></td>
-                    <td><input onClick={this.modifySeat} id={10*i+2} type="checkbox"></input></td>
-                    <td><input onClick={this.modifySeat} id={10*i+3} type="checkbox"></input></td>
-                    <td><input onClick={this.modifySeat} id={10*i+4} type="checkbox"></input></td>
-                    <td><input onClick={this.modifySeat} id={10*i+5} type="checkbox"></input></td>
-                    <td><input type="checkbox" class="mid"></input></td>
-                    <td><input onClick={this.modifySeat} id={10*i+6} type="checkbox"></input></td>
-                    <td><input onClick={this.modifySeat} id={10*i+7} type="checkbox"></input></td>
-                    <td><input onClick={this.modifySeat} id={10*i+8} type="checkbox"></input></td>
-                    <td><input onClick={this.modifySeat} id={10*i+9} type="checkbox"></input></td>
-                    <td><input onClick={this.modifySeat} id={10*i+10} type="checkbox"></input></td>
+                    {seatrow}
                 </tr>
             ));
         }
@@ -89,6 +89,7 @@ class RenderSeats extends React.Component {
 //main
 
 retrieveAvailableSeats();//sets 'availableSeats' array   
+console.log(availableSeats);
 
 ReactDOM.render(<RenderSeats/>,document.getElementById("main_body"));
 

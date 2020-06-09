@@ -1,44 +1,42 @@
 
-const url="http://7da2113acb24.ngrok.io";
+const url="http://fd472f53857e.ngrok.io";
 sessionStorage.setItem("url",url);
 
 class RenderLRButtons extends React.Component{
-    static loginEvent=function(event) {
-        console.log("yo");
+    loginEvent=function(event) {
         event.preventDefault();
+        event.target.disabled=true;
         ReactDOM.render(<RenderLoginFields/>,document.getElementById('authentication-fields'));
-        const login_submit=document.getElementById('submit');
         sessionStorage.setItem("authenticated","false");
-        login_submit.addEventListener('click',RenderLoginFields.call_auth_user);
     }
 
-    static registerEvent=function(event){
+    registerEvent=function(event){
         event.preventDefault();
+        event.target.disabled=true;
         ReactDOM.render(<RenderRegisterFields/>,document.getElementById('authentication-fields'));
-        const register_submit=document.getElementById('submit');
         sessionStorage.setItem('authenticated',"false");
-        register_submit.addEventListener('click',RenderRegisterFields.call_create_user);
     }
     render(){
         return (
             <div id="buttons">
             <span>Already a User ?</span>
-            <button id="login-button">Login</button>
+            <button id="login-button" onClick={this.loginEvent}>Login</button>
             <br></br>
             <span>New User ?</span>
-            <button id="register-button">Register</button>
+            <button id="register-button" onClick={this.registerEvent}>Register</button>
             </div>
         );
     }
 };
 
 class RenderLoginFields extends React.Component{
-    static call_auth_user=function(event){
+    call_auth_user=function(event){
         event.preventDefault();
+        event.target.disabled=true;
         sessionStorage.setItem("Admin-Login","false");
         authenticateUser();
         if(sessionStorage.getItem("Admin-Login")==="true"){
-            document.getElementById("top-bar").removeChild(document.getElementById("authentication-fields"));        
+            document.getElementById("top-bar").removeChild(document.getElementById("authentication-fields"));
             ReactDOM.render(<RenderAdminForm/>,document.getElementById("main"));
         }
         else{
@@ -56,8 +54,8 @@ class RenderLoginFields extends React.Component{
                     <input type="text" placeholder="Enter Username" id="user"></input>
                     <input type="password" placeholder="Enter Password" id="pass"></input>
                     <br></br>
-                    <input type="submit" id="submit" value="Submit" class="submit"></input>
-                    <input type="submit" id="back" value="Back" class="submit" onClick={()=>{event.preventDefault();window.location.reload();}}></input>
+                    <input type="submit" id="submit" value="Submit" class="submit" onClick={this.call_auth_user}></input>
+                    <input type="submit" id="back" value="Back" class="submit" onClick={(e)=>{e.preventDefault();ReactDOM.render(<RenderLRButtons/>,document.getElementById('authentication-fields'));}}></input>
                 </form>
             </div>
         );
@@ -65,25 +63,33 @@ class RenderLoginFields extends React.Component{
 };
 
 class RenderRegisterFields extends React.Component{
-    static call_create_user=function(event){
+    call_create_user=function(event){
         event.preventDefault();
+        event.target.disabled=true;
         createUser();
         if(sessionStorage.getItem('authenticated')==="true"){
             ReactDOM.render(<RenderForwardButtons/>,document.getElementById('authentication-fields'));
         }
+    }
+    popupFunction=function(){
+        const popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
     }
     render(){
         return (
             <div id="register-input">
                 <form>
                     <input type="text" placeholder="Username" id="user"></input>
-                    <input type="password" placeholder="Password" id="pass"></input>
+                    <div class="popup">
+                    <span class="popuptext" id="myPopup"><ul><li>Atleast a Uppercase Letter</li><li>Atleast a Lowercase Letter</li><li>Min 8 chars and Max 12 chars</li></ul></span>
+                    </div>
+                    <input type="password" placeholder="Password" id="pass" onClick={this.popupFunction}></input>
                     <br></br>
                     <input type="text" placeholder="Email" id="email"></input>
                     <input type="text" placeholder="Phone no." id="phone"></input>
-                    <br></br>
-                    <input type="submit" placeholder="Submit" id="submit" class="submit"></input>
-                    <input type="submit" id="back" value="Back" class="submit" onClick={()=>{event.preventDefault();window.location.reload();}}></input>
+                    <br></br>   
+                    <input type="submit" placeholder="Submit" id="submit" class="submit" onClick={this.call_create_user}></input>
+                    <input type="submit" id="back" value="Back" class="submit" onClick={(e)=>{e.preventDefault();ReactDOM.render(<RenderLRButtons/>,document.getElementById('authentication-fields'));}}></input>
                 </form>
             </div>
         );
@@ -96,8 +102,8 @@ class RenderForwardButtons extends React.Component{
             <div id="forward-buttons">
                 <span style={{cursor:"pointer",textDecoration:"underline"}} onClick={()=>{sessionStorage.setItem("authenticated","false");window.location.reload();}}>Hey {sessionStorage.getItem('Username')}</span>
                 <br></br>
-                <button id="book-history" onClick={RenderUserHistory.getBookingHistory}>Booking History >></button>
-                <button id="book-your-movie" onClick={()=>{window.location.href="./movies.htm"}}>Book Your Show >></button>
+                <button id="book-history" onClick={(e)=>{console.log("yo");e.target.disabled=true;RenderUserHistory.getBookingHistory()}}>Booking History >></button>
+                <button id="book-your-movie" onClick={(e)=>{console.log("yo");e.target.disabled=true;window.location.href="./movies.htm"}}>Book Your Show >></button>
             </div>
         );
     }
@@ -248,12 +254,6 @@ if(sessionStorage.getItem("authenticated")==="true"){
 
 else{
     ReactDOM.render(<RenderLRButtons/>,document.getElementById('authentication-fields'));
-    
-    const login=document.getElementById("login-button");
-    const register=document.getElementById("register-button");
-
-    login.addEventListener('click',RenderLRButtons.loginEvent);
-    register.addEventListener('click',RenderLRButtons.registerEvent);
 }
 
 

@@ -7,9 +7,10 @@ const emailTicket=function(user,seats,movie,slot,audi,date){
     },(error,row)=>{
         let nodemailer = require('nodemailer');
         let transporter = nodemailer.createTransport({
-            host: 'smtp.gmail.com',
-            port: 465,
-            secure: true,
+            //host: 'smtp.gmail.com',
+            //port: 465,
+            //secure: true,
+            service:'gmail',
             auth: {
                 user: 'moviebookingportal@gmail.com',
                 pass: 'movie@123'

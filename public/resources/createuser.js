@@ -9,6 +9,21 @@ function createUser (){
         return ;
     }
 
+    if(!(/^(?=.*[a-z])(?=.*[A-Z]).{8,12}$/.test(password))){
+        alert("Password does not meet the rule requirements.Please try again.");
+        return;
+    }
+
+    if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))){
+        alert("Please enter a valid email address.");
+        return;
+    }
+
+    if(!(/^\d{10}$/.test(phone))){
+        alert("Please enter a valid 10 digit phone number.");
+        return;
+    }
+
     const server=sessionStorage.getItem("url");//server-url
     const endpoint=server+`/register/?username=${username}&password=${password}&email=${email}&phone=${phone}`;
     const xhr=new XMLHttpRequest();

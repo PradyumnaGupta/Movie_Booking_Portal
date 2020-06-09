@@ -13,18 +13,14 @@ const getSeats=require('./getseats.js');
 const submitFinalTicket=require('./submitfinalticket.js');
 const removeShow=require("./removeshow");
 const addShow=require('./addshow.js');
-//const emailTicket=require('./emailticket.js');
-//const checkIfSeatsAvailable=require('./utils.js');
+const dailyAudiTableUpdate=require('./dailyauditableupdate.js');
 
 const app=express();
 const Port=4002;
 
-
 app.use(cors());
 
 app.use(express.static("../public"));
-
-//app.get('/favicon.ico', (req, res) => res.status(204));
 
 app.get("/login/",(req,res,next)=>{
     checkUser(req.query.username,req.query.password,res);
@@ -58,9 +54,7 @@ app.get("/remove_show/",(req,res,next)=>{
     removeShow(req.query.movie,req.query.audi,res);
 });
 
-
-//setTimeout(()=>{console.log("test1")},(new Date((new Date().getFullYear()),(new Date().getMonth()),(new Date().getDate()),24,0).getTime())-(new Date().getTime()));
-//setInterval(()=>{setTimeout(()=>{console.log("test2")},(new Date((new Date().getFullYear()),(new Date().getMonth()),(new Date().getDate()),24,0).getTime())-(new Date().getTime()))},24*60*60*60);
+setTimeout(dailyAudiTableUpdate,(new Date((new Date().getFullYear()),(new Date().getMonth()),(new Date().getDate()),24,0).getTime())-(new Date().getTime()));
 
 app.listen(Port,()=>{
     console.log(`Listening at port ${Port}`);

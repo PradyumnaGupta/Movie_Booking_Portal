@@ -16,7 +16,7 @@ class RenderMovieSlideShow extends React.Component{
         
         RenderMovieSlideShow.slideIndex=(RenderMovieSlideShow.slideIndex+1)%movie_posters.length;
 
-        setTimeout(RenderMovieSlideShow.showSlides,1700);
+        setTimeout(RenderMovieSlideShow.showSlides,1500);
     }
 
     moveSlide(e) {
