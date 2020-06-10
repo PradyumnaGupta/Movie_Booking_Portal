@@ -1,5 +1,5 @@
 
-const url="http://fd472f53857e.ngrok.io";
+const url="http://6348fd0d091a.ngrok.io";
 sessionStorage.setItem("url",url);
 
 class RenderLRButtons extends React.Component{

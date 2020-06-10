@@ -6,8 +6,7 @@ const addMovie=function(new_movie,new_audi,new_poster){
     //xhr.responseType='json';
     xhr.onreadystatechange=()=>{
         if(xhr.readyState===XMLHttpRequest.DONE){
-            let res=xhr.response;
-            console.log(xhr.response);
+            //console.log(xhr.response);
         }
     }
     xhr.open('GET',endpoint,false);

@@ -4,15 +4,19 @@ const checkIfSeatsAvailable=require('./utils.js');
 const submitFinalTicket=function(user,movie,audi,slot,day,seats,res){
     const sqlite=require('sqlite3');
     const db=new sqlite.Database('../Databases/MBP.db');
+
     let today=new Date().getDay();
     day=(day<today)?(7-today+day):(day-today);
+
     db.get(`SELECT Slot_${new Array("A","B","C")[JSON.parse(slot)-1]} FROM auditoriums WHERE Auditorium="${audi}"`,
     (error,row)=>{
         if(error)
         console.log(error);
+
         seats=JSON.parse(seats);
         row=JSON.parse(row[Object.keys(row)[0]]);
-        arr=row[day];
+
+        let arr=row[day];//available seats on that day
         
         if(!checkIfSeatsAvailable(arr,seats)){
             res.send("SEATS NOT FOUND");
@@ -23,9 +27,12 @@ const submitFinalTicket=function(user,movie,audi,slot,day,seats,res){
             arr.splice(arr.indexOf(seats[i]),1);
 
             row[day]=arr;
+
             db.run(`UPDATE auditoriums SET Slot_${new Array("A","B","C")[JSON.parse(slot)-1]}="${JSON.stringify(row)}" WHERE Auditorium="${audi}" `,
             (error)=>{if(error) console.log(error)});
+            
             let date=new Date();
+            date.setDate(date.getDate()+day);
             date=`${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`;
             
             db.get(`SELECT Ticket_Details FROM booked_tickets WHERE Username="${user}"`,(error,row)=>{

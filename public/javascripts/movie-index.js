@@ -2,7 +2,7 @@
 class RenderMovieSlideShow extends React.Component{
     static slideIndex=1;
 
-    static showSlides(n) {
+    static showSlides=function(n) {
         const slides=document.querySelectorAll(".mySlides");
         const dots=document.querySelectorAll(".dot");
         slides.forEach((val) => {
@@ -19,8 +19,8 @@ class RenderMovieSlideShow extends React.Component{
         setTimeout(RenderMovieSlideShow.showSlides,1500);
     }
 
-    moveSlide(e) {
-        this.showSlides(slideIndex = e.target.id);
+    moveSlide=function(e) {
+        RenderMovieSlideShow.showSlides(RenderMovieSlideShow.slideIndex = e.target.id);
     }
 
     render(){
