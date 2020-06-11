@@ -1,9 +1,9 @@
 
 let availableSeats=[];
 
-const retrieveAvailableSeats=function(){
+const retrieveAvailableSeats=function(audi,slot,day){
     const server=sessionStorage.getItem("url");//ipconfigiserver-url
-    const endpoint=server+`/seat_info/?audi=${sessionStorage.getItem("audi")}&slot=${sessionStorage.getItem("slot")}&day=${sessionStorage.getItem("day")}`;
+    const endpoint=server+`/seat_info/?audi=${audi}&slot=${slot}&day=${day}`;
     const xhr=new XMLHttpRequest();
     //xhr.responseType='json';
     xhr.onreadystatechange=()=>{

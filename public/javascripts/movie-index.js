@@ -80,21 +80,46 @@ class RenderMovies extends React.Component{
 
 class RenderMovieDetails extends React.Component{
     activateSlot=function(e){
-         let current_time=new Date();
-        if(parseInt(sessionStorage.getItem("day"))===parseInt(current_time.getDay())){
-            if(parseInt(current_time.getHours())>9)
-            document.querySelectorAll(".A").forEach(val=>{val.disabled=true});
-            if(parseInt(current_time.getHours())>14)
-            document.querySelectorAll(".B").forEach(val=>{val.disabled=true});
-            if(parseInt(current_time.getHours())>19)
-            document.querySelectorAll(".C").forEach(val=>{val.disabled=true});
-        }
-        else {
-            document.querySelectorAll(".A").forEach(val=>{val.disabled=false});
-            document.querySelectorAll(".B").forEach(val=>{val.disabled=false});
-            document.querySelectorAll(".C").forEach(val=>{val.disabled=false});
-        }
+        let current_time=new Date();
+        this.props.data.forEach((val)=>{
+            if(parseInt(sessionStorage.getItem("day"))===parseInt(current_time.getDay())){
+                if(parseInt(current_time.getHours())>9)
+                document.querySelectorAll(`#${val.Audi.slice(-1)} .A`).forEach(val=>{val.disabled=true});
+                if(parseInt(current_time.getHours())>14)
+                document.querySelectorAll(`#${val.Audi.slice(-1)} .B`).forEach(val=>{val.disabled=true});
+                if(parseInt(current_time.getHours())>19)
+                document.querySelectorAll(`#${val.Audi.slice(-1)} .C`).forEach(val=>{val.disabled=true});
+            }
+            else {
+                document.querySelectorAll(`#${val.Audi.slice(-1)} .A`).forEach(val=>{val.disabled=false});
+                document.querySelectorAll(`#${val.Audi.slice(-1)} .B`).forEach(val=>{val.disabled=false});
+                document.querySelectorAll(`#${val.Audi.slice(-1)} .C`).forEach(val=>{val.disabled=false});
+            }
+        })
     }
+
+    alertFastFillingSeats=async function(){
+        this.props.data.forEach((val)=>{
+            retrieveAvailableSeats(val.Audi.slice(-1),"1",sessionStorage.getItem("day"));
+            if(availableSeats.length<10)
+            document.querySelector(`#${val.Audi.slice(-1)} .A`).style.background="orangered";
+            else 
+            document.querySelector(`#${val.Audi.slice(-1)} .A`).style.background="#fee23e";
+
+            retrieveAvailableSeats(val.Audi.slice(-1),"2",sessionStorage.getItem("day"));
+            if(availableSeats.length<10)
+            document.querySelector(`#${val.Audi.slice(-1)} .B`).style.background="orangered";
+            else 
+            document.querySelector(`#${val.Audi.slice(-1)} .B`).style.background="#fee23e";
+
+            retrieveAvailableSeats(val.Audi.slice(-1),"3",sessionStorage.getItem("day"));
+            if(availableSeats.length<10)
+            document.querySelector(`#${val.Audi.slice(-1)} .C`).style.background="orangered";
+            else 
+            document.querySelector(`#${val.Audi.slice(-1)} .C`).style.background="#fee23e";
+        });
+    }
+
     render(){
         let weekdays=new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
         let today=new Date().getDay();
@@ -102,7 +127,7 @@ class RenderMovieDetails extends React.Component{
         sessionStorage.setItem("slot","none");
         for(let i=0;i<this.props.data.length;i++)
         auditoriums.push((
-            <tr class="audi">
+            <tr class="audi" id={this.props.data[i].Audi.slice(-1)}>
                     <td>{this.props.data[i].Audi}</td>
                     <td><button class="A" onClick={(e)=>{sessionStorage.setItem("slot","1");sessionStorage.setItem("audi",this.props.data[i].Audi.substr(-1));}}> 9 AM </button></td>
                     <td><button class="B" onClick={(e)=>{sessionStorage.setItem("slot","2");sessionStorage.setItem("audi",this.props.data[i].Audi.substr(-1));}}> 2 PM </button></td>
@@ -111,7 +136,7 @@ class RenderMovieDetails extends React.Component{
         ));
         return(
             <div>
-            <select id="Date-Buttons" onChange={(e)=>{document.getElementById(`inner ${this.props.movie}`).style.display="table";document.getElementById(`show_select ${this.props.movie}`).style.display="block";sessionStorage.setItem("day",weekdays.indexOf(e.target.value));this.activateSlot();}}>
+            <select id="Date-Buttons" onChange={(e)=>{document.getElementById(`inner ${this.props.movie}`).style.display="table";document.getElementById(`show_select ${this.props.movie}`).style.display="block";sessionStorage.setItem("day",weekdays.indexOf(e.target.value));this.activateSlot();this.alertFastFillingSeats();}}>
                 <option value="" disabled selected>Select a day</option>
                 <option id="d1">{weekdays[today]}</option>
                 <option id="d2">{weekdays[(today+1)%7]}</option>

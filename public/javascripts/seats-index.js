@@ -29,7 +29,7 @@ class RenderSeats extends React.Component {
     
     static on_submit=(event)=>{
         event.preventDefault();
-        if(RenderSeats.selected_seats.length>6){
+        if(RenderSeats.selected_seats.length>100){
             ReactDOM.render(<RenderMessage message="You can't select more than 6 seats." color="red"/>,document.getElementById("message_placeholder"));
             return;
         }
@@ -47,7 +47,7 @@ class RenderSeats extends React.Component {
             else {
                 ReactDOM.render(<RenderMessage message="Sorry these sets were booked just now. Please select seats again !!" color="black"/>,document.getElementById("message_placeholder"));
             }
-            retrieveAvailableSeats();
+            retrieveAvailableSeats(sessionStorage.getItem("audi"),sessionStorage.getItem("slot"),sessionStorage.getItem("day"));//sets 'availableSeats' array   
             ReactDOM.render(<RenderSeats/>,document.getElementById("main_body"));
             RenderSeats.hideBookedSeats();
             RenderSeats.selected_seats=[];
@@ -88,7 +88,7 @@ class RenderSeats extends React.Component {
 
 //main
 
-retrieveAvailableSeats();//sets 'availableSeats' array   
+retrieveAvailableSeats(sessionStorage.getItem("audi"),sessionStorage.getItem("slot"),sessionStorage.getItem("day"));//sets 'availableSeats' array   
 console.log(availableSeats);
 
 ReactDOM.render(<RenderSeats/>,document.getElementById("main_body"));
