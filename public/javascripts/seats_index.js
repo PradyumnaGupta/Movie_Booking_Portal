@@ -29,7 +29,7 @@ class RenderSeats extends React.Component {
     
     static on_submit=(event)=>{
         event.preventDefault();
-        if(RenderSeats.selected_seats.length>100){
+        if(RenderSeats.selected_seats.length>6){
             ReactDOM.render(<RenderMessage message="You can't select more than 6 seats." color="red"/>,document.getElementById("message_placeholder"));
             return;
         }

@@ -2,7 +2,7 @@
 const sendFinalTicket=function(seats){
     console.log(seats);
     const server=sessionStorage.getItem("url");//ipconfigiserver-url
-    const endpoint=server+`/submit_ticket/?user=${sessionStorage.getItem("Username")}&movie=${sessionStorage.getItem("movie")}&audi=${sessionStorage.getItem("audi")}&slot=${sessionStorage.getItem("slot")}&day=${sessionStorage.getItem("day")}&seats=${JSON.stringify(seats)}`;
+    const endpoint=server+`/user/bookings/?user=${sessionStorage.getItem("Username")}&movie=${sessionStorage.getItem("movie")}&audi=${sessionStorage.getItem("audi")}&slot=${sessionStorage.getItem("slot")}&day=${sessionStorage.getItem("day")}&seats=${JSON.stringify(seats)}`;
     const xhr=new XMLHttpRequest();
     //xhr.responseType='json';
     xhr.onreadystatechange=()=>{
@@ -18,6 +18,6 @@ const sendFinalTicket=function(seats){
             return;
         }
     }
-    xhr.open('GET',endpoint,false);
+    xhr.open('POST',endpoint,false);
     xhr.send();
 }

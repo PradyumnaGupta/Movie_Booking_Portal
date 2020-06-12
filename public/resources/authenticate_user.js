@@ -8,7 +8,7 @@ function authenticateUser (){
     }
 
     const server=sessionStorage.getItem("url");//server-url
-    const endpoint=server+`/login/?username=${username}&password=${password}`;
+    const endpoint=server+`/user/login/?username=${username}&password=${password}`;
     const xhr=new XMLHttpRequest();
     //xhr.responseType='json';
     xhr.onreadystatechange=()=>{
@@ -22,15 +22,10 @@ function authenticateUser (){
                 sessionStorage.setItem("Admin-Login","true");
                 return;
             }
-            else res=JSON.parse(res);
-
-            if((res.Username===username) && (res.Password===password)){
+            else if (res){
                 sessionStorage.setItem('authenticated',"true");
             
-                sessionStorage.setItem('Username',res.Username);
-                sessionStorage.setItem('Password',res.Password);
-                sessionStorage.setItem('Email',res.Email);
-                sessionStorage.setItem('Phone_no',res.Phone_no);
+                sessionStorage.setItem('Username',username);
             }
             return ;
         }

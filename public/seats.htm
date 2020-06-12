@@ -3,7 +3,7 @@
 <head>  
     <script>
             if(sessionStorage.getItem("authenticated")!=="true")
-            window.location.href="./login.htm";
+            window.location.href="./home.htm";
     </script>
 
     <title>Choose Seats</title>
@@ -12,11 +12,11 @@
     <script src="./resources/react-dom.production.min.js" crossorigin></script>
     <script src="./resources/babel.min.js"></script>
 
-    <script type="text/babel" src="./resources/retrieveavailableseats.js" defer></script>
-    <script type="text/babel" src="./resources/sendfinalticket.js" defer></script>
-    <script type="text/babel" src="./javascripts/seats-index.js" defer></script>
+    <script type="text/babel" src="./resources/retrieve_available_seats.js" defer></script>
+    <script type="text/babel" src="./resources/send_final_ticket.js" defer></script>
+    <script type="text/babel" src="./javascripts/seats_index.js" defer></script>
 
-    <link rel="stylesheet" type="text/css" href="./stylesheets/seats-style.css">
+    <link rel="stylesheet" type="text/css" href="./stylesheets/seats_style.css">
 
 </head>
 <body id="body">

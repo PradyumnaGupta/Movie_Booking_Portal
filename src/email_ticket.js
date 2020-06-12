@@ -1,11 +1,16 @@
 
 const emailTicket=function(user,seats,movie,slot,audi,date){
-    const sqlite=require('sqlite3');
-    const db=new sqlite.Database('../Databases/MBP.db');
+
+    const db=require("./database_initializer.js");
+    
     db.get("SELECT * FROM users WHERE Username=$user",{
         $user:user
     },(error,row)=>{
-        let nodemailer = require('nodemailer');
+
+        if(error)
+        console.log(error);
+
+        const nodemailer = require('nodemailer');
         let transporter = nodemailer.createTransport({
             //host: 'smtp.gmail.com',
             //port: 465,

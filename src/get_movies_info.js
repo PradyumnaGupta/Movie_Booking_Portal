@@ -1,9 +1,12 @@
 
 const getMoviesInfo=function(res){
-    const sqlite=require('sqlite3');
-    const db=new sqlite.Database('../Databases/MBP.db');
+    
+    const db=require("./database_initializer.js");
 
     db.all("SELECT * FROM movies",(error,rows)=>{
+        if(error)
+        console.log(error);
+
         res.send(rows);
     })
 }

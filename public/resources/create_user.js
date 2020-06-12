@@ -25,7 +25,7 @@ function createUser (){
     }
 
     const server=sessionStorage.getItem("url");//server-url
-    const endpoint=server+`/register/?username=${username}&password=${password}&email=${email}&phone=${phone}`;
+    const endpoint=server+`/user/register/?username=${username}&password=${password}&email=${email}&phone=${phone}`;
     const xhr=new XMLHttpRequest();
     //xhr.responseType='json';
     xhr.onreadystatechange=()=>{
@@ -46,6 +46,6 @@ function createUser (){
             }
         }
     }
-    xhr.open('GET',endpoint,false);
+    xhr.open('POST',endpoint,false);
     xhr.send();
 }

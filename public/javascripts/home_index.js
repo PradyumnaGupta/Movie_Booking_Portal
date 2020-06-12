@@ -1,5 +1,5 @@
 
-const url="http://b1f55144630c.ngrok.io";
+const url="http://a04c6da66092.ngrok.io";
 sessionStorage.setItem("url",url);
 
 class RenderLRButtons extends React.Component{
@@ -44,6 +44,7 @@ class RenderLoginFields extends React.Component{
                 ReactDOM.render(<RenderForwardButtons/>,document.getElementById('authentication-fields'));
             }
         }
+        event.target.disabled=false;
     }
     
     render(){
@@ -70,6 +71,7 @@ class RenderRegisterFields extends React.Component{
         if(sessionStorage.getItem('authenticated')==="true"){
             ReactDOM.render(<RenderForwardButtons/>,document.getElementById('authentication-fields'));
         }
+        event.target.disabled=false;
     }
     popupFunction=function(){
         const popup = document.getElementById("myPopup");
@@ -102,8 +104,8 @@ class RenderForwardButtons extends React.Component{
             <div id="forward-buttons">
                 <span style={{cursor:"pointer",textDecoration:"underline"}} onClick={()=>{sessionStorage.setItem("authenticated","false");window.location.reload();}}>Hey {sessionStorage.getItem('Username')}</span>
                 <br></br>
-                <button id="book-history" onClick={(e)=>{console.log("yo");e.target.disabled=true;RenderUserHistory.getBookingHistory()}}>Booking History >></button>
-                <button id="book-your-movie" onClick={(e)=>{console.log("yo");e.target.disabled=true;window.location.href="./movies.htm"}}>Book Your Show >></button>
+                <button id="book-history" onClick={(e)=>{e.target.disabled=true;RenderUserHistory.getBookingHistory()}}>Booking History >></button>
+                <button id="book-your-movie" onClick={(e)=>{e.target.disabled=true;window.location.href="./movies.htm"}}>Book Your Show >></button>
             </div>
         );
     }

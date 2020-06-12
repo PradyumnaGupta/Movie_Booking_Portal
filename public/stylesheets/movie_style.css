@@ -204,6 +204,7 @@ body{
 
 .inner tr td button:hover{
     background: #fee23e;
+    box-shadow: 1px 1px 5px 1px black;
 }
 
 .inner tr td button:focus{

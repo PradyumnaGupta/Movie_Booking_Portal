@@ -1,6 +1,5 @@
 
-const sqlite=require('sqlite3');
-const db=new sqlite.Database('../Databases/MBP.db');
+const db=require("./database_initializer.js");
 
 let seats=[],row=[];
 for(let i=1;i<=50;i++){

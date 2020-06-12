@@ -1,7 +1,8 @@
 
 const checkMatchingTickets=function(user,res){
-    const sqlite=require('sqlite3');
-    const db=new sqlite.Database('../Databases/MBP.db');
+    
+    const db=require("./database_initializer.js");
+    
     db.get(`SELECT * FROM booked_tickets WHERE Username="${user}" `,
     (error,rows)=>{
         if(error)

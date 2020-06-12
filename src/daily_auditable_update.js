@@ -1,6 +1,6 @@
 const dailyAudiTableUpdate=function(){
-    const sqlite=require('sqlite3');
-    const db=new sqlite.Database('../Databases/MBP.db');
+    
+    const db=require("./database_initializer.js");
     
     console.log("Performing daily table update ....")
 
@@ -10,6 +10,9 @@ const dailyAudiTableUpdate=function(){
     }
 
     db.all("SELECT * FROM auditoriums",(error,rows)=>{
+        if(error)
+        console.log(error);
+
         rows=rows.map((val)=>{
             
             arr=JSON.parse(val.Slot_A);

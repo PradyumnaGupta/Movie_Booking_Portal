@@ -1,11 +1,11 @@
-const emailTicket=require('./emailticket.js');
+const emailTicket=require('./email_ticket.js');
 const checkIfSeatsAvailable=require('./utils.js');
 
 const submitFinalTicket=function(user,movie,audi,slot,day,seats,res){
-    const sqlite=require('sqlite3');
-    const db=new sqlite.Database('../Databases/MBP.db');
+    const db=require("./database_initializer.js");
 
     let today=new Date().getDay();
+    day=parseInt(day);
     day=(day<today)?(7-today+day):(day-today);
 
     db.get(`SELECT Slot_${new Array("A","B","C")[JSON.parse(slot)-1]} FROM auditoriums WHERE Auditorium="${audi}"`,

@@ -1,7 +1,7 @@
 
 const retreiveBookingHistory=function(){
     const server=url;
-    const endpoint=server+`/history/?user=${sessionStorage.getItem("Username")}`;
+    const endpoint=server+`/user/bookings/?user=${sessionStorage.getItem("Username")}`;
     const xhr=new XMLHttpRequest();
     //xhr.responseType='json';
     xhr.onreadystatechange=()=>{

@@ -1,17 +1,16 @@
 
-function retreiveMoviesAndShows(){
+let availableSeats=[];
 
+const retrieveAvailableSeats=function(audi,slot,day){
     const server=sessionStorage.getItem("url");//ipconfigiserver-url
-    const endpoint=server+'/movies_info/';
+    const endpoint=server+`/movies/seats/?audi=${audi}&slot=${slot}&day=${day}`;
     const xhr=new XMLHttpRequest();
     //xhr.responseType='json';
     xhr.onreadystatechange=()=>{
         if(xhr.readyState===XMLHttpRequest.DONE){
-            let res=xhr.response;
-            //console.log(JSON.parse(res));
-            sessionStorage.setItem("movie_list",res);
+            availableSeats=JSON.parse(xhr.response);
         }
     }
-    xhr.open('GET',endpoint,false);
+    xhr.open('GET',endpoint,false); 
     xhr.send();
 }

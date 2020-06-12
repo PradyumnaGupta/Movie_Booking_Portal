@@ -1,7 +1,7 @@
 
 const deleteMovie=function(movie,audi){
     const server=sessionStorage.getItem("url");//ipconfigserver-url
-    const endpoint=server+`/remove_show/?movie=${movie}&audi=${audi}`;
+    const endpoint=server+`/movies/?movie=${movie}&audi=${audi}`;
     const xhr=new XMLHttpRequest();
     //xhr.responseType='json';
     xhr.onreadystatechange=()=>{
@@ -12,6 +12,6 @@ const deleteMovie=function(movie,audi){
             }
         }
     }
-    xhr.open('GET',endpoint,false);
+    xhr.open('DELETE',endpoint,false);
     xhr.send();    
 }

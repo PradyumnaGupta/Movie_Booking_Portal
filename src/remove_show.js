@@ -3,8 +3,7 @@ let state={movie:"",audi:"",day:"",month:""};//initializing state
 
 const removeShow=function(movie,audi,res){
 
-    const sqlite=require('sqlite3');
-    const db=new sqlite.Database('../Databases/MBP.db');
+    const db=require('./database_initializer.js');
 
     let matchingTicketFound=false;
 
@@ -19,17 +18,15 @@ const removeShow=function(movie,audi,res){
             rows.every((row)=>{
                 JSON.parse(row.Ticket_Details).every((val)=>{
                     let date_show=val.Date.split('-');
-                    if(((new Date(parseInt(date_show[2]),parseInt(date_show[1])-1,parseInt(date_show[0]),0).getTime())>=(today.getTime()))&&(val.Audi===audi.slice(-1))&&(val.Movie===movie)){
+                    if(((new Date(parseInt(date_show[2]),parseInt(date_show[1])-1,parseInt(date_show[0])+1,0).getTime())>=(today.getTime()))&&(val.Audi===audi.slice(-1))&&(val.Movie===movie)){
                         res.send("ERROR");
                         matchingTicketFound=true;
                         return false;
                     }
                     return true;
                 })
-                if(!matchingTicketFound)
-                return true;
-                else return false;
-            });
+                return !matchingTicketFound;
+                });
 
             if(!matchingTicketFound){
                 db.run(`DELETE FROM movies WHERE Movie_name="${movie}" AND Audi="${audi}"`);

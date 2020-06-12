@@ -1,12 +1,15 @@
 
-const addMovie=function(new_movie,new_audi,new_poster){
+function retreiveMoviesAndShows(){
+
     const server=sessionStorage.getItem("url");//ipconfigiserver-url
-    const endpoint=server+`/add_show/?movie=${new_movie}&audi=${new_audi}&poster_src=${new_poster}`;
+    const endpoint=server+'/movies/';
     const xhr=new XMLHttpRequest();
     //xhr.responseType='json';
     xhr.onreadystatechange=()=>{
         if(xhr.readyState===XMLHttpRequest.DONE){
-            //console.log(xhr.response);
+            let res=xhr.response;
+            //console.log(JSON.parse(res));
+            sessionStorage.setItem("movie_list",res);
         }
     }
     xhr.open('GET',endpoint,false);

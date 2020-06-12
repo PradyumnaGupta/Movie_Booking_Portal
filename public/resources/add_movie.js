@@ -1,16 +1,14 @@
 
-let availableSeats=[];
-
-const retrieveAvailableSeats=function(audi,slot,day){
+const addMovie=function(new_movie,new_audi,new_poster){
     const server=sessionStorage.getItem("url");//ipconfigiserver-url
-    const endpoint=server+`/seat_info/?audi=${audi}&slot=${slot}&day=${day}`;
+    const endpoint=server+`/movies/?movie=${new_movie}&audi=${new_audi}&poster_src=${new_poster}`;
     const xhr=new XMLHttpRequest();
     //xhr.responseType='json';
     xhr.onreadystatechange=()=>{
         if(xhr.readyState===XMLHttpRequest.DONE){
-            availableSeats=JSON.parse(xhr.response);
+            //console.log(xhr.response);
         }
     }
-    xhr.open('GET',endpoint,false); 
+    xhr.open('PUT',endpoint,false);
     xhr.send();
 }
