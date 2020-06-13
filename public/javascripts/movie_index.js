@@ -171,5 +171,5 @@ ReactDOM.render(<RenderMovieSlideShow data={movie_posters}/>,document.getElement
 RenderMovieSlideShow.showSlides();
 ReactDOM.render(<RenderMovies data={[movies,movie_posters,rows]}/>,document.getElementById("movies_list"));
 
-document.getElementById("logout").addEventListener('click',()=>{sessionStorage.setItem("authenticated","false");window.location.href="../login.htm";})
-document.getElementById("home").addEventListener('click',()=>{window.location.href="../login.htm";})
+document.getElementById("logout").addEventListener('click',()=>{sessionStorage.setItem("authenticated","false");window.location.href="../home.htm";})
+document.getElementById("home").addEventListener('click',()=>{window.location.href="../home.htm";})

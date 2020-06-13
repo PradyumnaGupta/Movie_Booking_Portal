@@ -6,7 +6,7 @@ function authenticateUser (){
         alert("Please provide both username and password");
         return ;
     }
-
+    console.log("yo");
     const server=sessionStorage.getItem("url");//server-url
     const endpoint=server+`/user/login/?username=${username}&password=${password}`;
     const xhr=new XMLHttpRequest();
@@ -14,6 +14,7 @@ function authenticateUser (){
     xhr.onreadystatechange=()=>{
         if(xhr.readyState===XMLHttpRequest.DONE){
             let res=xhr.response;
+            console.log(res);
             if(!res){
                 alert("There is no account linked to that username and password");
                 return ;
@@ -22,7 +23,7 @@ function authenticateUser (){
                 sessionStorage.setItem("Admin-Login","true");
                 return;
             }
-            else if (res){
+            else if (res==="Authentication Successful"){
                 sessionStorage.setItem('authenticated',"true");
             
                 sessionStorage.setItem('Username',username);

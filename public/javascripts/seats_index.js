@@ -99,5 +99,5 @@ RenderSeats.hideBookedSeats();
 const submit_button=document.getElementById("submit");
 submit_button.addEventListener("click",RenderSeats.on_submit);
 
-document.getElementById("logout").addEventListener('click',()=>{sessionStorage.setItem("authenticated","false");window.location.href="../login.htm";})
-document.getElementById("home").addEventListener('click',()=>{window.location.href="../login.htm";})
+document.getElementById("logout").addEventListener('click',()=>{sessionStorage.setItem("authenticated","false");window.location.href="../home.htm";})
+document.getElementById("home").addEventListener('click',()=>{window.location.href="../home.htm";})

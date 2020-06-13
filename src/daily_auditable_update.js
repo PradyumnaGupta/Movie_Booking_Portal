@@ -4,9 +4,9 @@ const dailyAudiTableUpdate=function(){
     
     console.log("Performing daily table update ....")
 
-    let row=[],arr;
+    let new_seats=[],arr;
     for(let i=1;i<=50;i++){
-        row.push(i);
+        new_seats.push(i);
     }
 
     db.all("SELECT * FROM auditoriums",(error,rows)=>{
@@ -17,17 +17,17 @@ const dailyAudiTableUpdate=function(){
             
             arr=JSON.parse(val.Slot_A);
             arr.splice(0,1);
-            arr.push(row);
+            arr.push(new_seats);
             val.Slot_A=JSON.stringify(arr);
 
             arr=JSON.parse(val.Slot_B);
             arr.splice(0,1);
-            arr.push(row);
+            arr.push(new_seats);
             val.Slot_B=JSON.stringify(arr); 
 
             arr=JSON.parse(val.Slot_C);
             arr.splice(0,1);
-            arr.push(row);
+            arr.push(new_seats);
             val.Slot_C=JSON.stringify(arr);
 
             db.run(`UPDATE auditoriums SET SLOT_A="${val.Slot_A}",SLOT_B="${val.Slot_B}",SLOT_C="${val.Slot_C}" WHERE Auditorium="${val.Auditorium}"`,
