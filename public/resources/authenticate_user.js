@@ -6,9 +6,9 @@ function authenticateUser (){
         alert("Please provide both username and password");
         return ;
     }
-    console.log("yo");
+    
     const server=sessionStorage.getItem("url");//server-url
-    const endpoint=server+`/user/login/?username=${username}&password=${password}`;
+    const endpoint=server+`/user/?username=${username}&password=${password}`;
     const xhr=new XMLHttpRequest();
     //xhr.responseType='json';
     xhr.onreadystatechange=()=>{

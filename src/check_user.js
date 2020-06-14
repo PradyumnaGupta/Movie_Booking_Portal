@@ -12,11 +12,14 @@ const checkUser=function(user,pass,res){
     db.get('SELECT * FROM users WHERE Username=$user',{
         $user:user,
     },(error,row)=>{
-        if(error)
-        console.log(error);
-
+        if(error){
+            console.log(error);
+            res.status(500).send();
+            return;
+        }
+        
         if(row&&row.Username===user&&passwordHash.verify(pass,row.Password))
-        res.status(200).send("Authentication Successful");
+        res.send("Authentication Successful");
         
         else res.status(404).send();
     });

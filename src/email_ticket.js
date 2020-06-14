@@ -7,8 +7,9 @@ const emailTicket=function(user,seats,movie,slot,audi,date){
         $user:user
     },(error,row)=>{
 
-        if(error)
-        console.log(error);
+        if(error){
+            console.log(error);
+        }
 
         const nodemailer = require('nodemailer');
         let transporter = nodemailer.createTransport({

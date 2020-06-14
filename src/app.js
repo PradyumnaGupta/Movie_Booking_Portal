@@ -18,11 +18,11 @@ app.use(cors());
 
 app.use(express.static("../public"));
 
-app.get("/user/login/",(req,res,next)=>{
+app.get("/user/",(req,res,next)=>{
     checkUser(req.query.username,req.query.password,res);
 });
 
-app.post("/user/register/",(req,res,next)=>{
+app.post("/user/",(req,res,next)=>{
     addUser(req.query.username,req.query.password,req.query.email,req.query.phone,res);
 });
 

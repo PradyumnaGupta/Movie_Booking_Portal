@@ -13,7 +13,7 @@ const addUser=function(user,pass,email,phone,res) {
     },function(error){
         if(error){
             //console.log("Duplicate account not allowed.");
-            res.send("Account with this username already exists.");
+            res.status(409).send("Account with this username already exists.");
         }
         else 
         res.send("OK");

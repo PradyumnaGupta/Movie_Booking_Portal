@@ -5,11 +5,15 @@ const checkMatchingTickets=function(user,res){
     
     db.get(`SELECT * FROM booked_tickets WHERE Username="${user}" `,
     (error,rows)=>{
-        if(error)
-        console.log(error);
+        if(error){
+            console.log(error);
+            res.status(500).send();
+            return;
+        }
+        
         if(rows)
         res.send(rows.Ticket_Details);
-        else res.send("[]");
+        else res.status(204).send("[]");
     });
 };
 

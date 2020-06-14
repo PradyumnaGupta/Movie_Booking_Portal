@@ -1,5 +1,5 @@
 
-const url="http://0f2067edb3a1.ngrok.io";
+const url="http://ac77f4d5092c.ngrok.io";
 sessionStorage.setItem("url",url);
 
 class RenderLRButtons extends React.Component{
@@ -85,7 +85,7 @@ class RenderRegisterFields extends React.Component{
                     <div class="popup">
                     <span class="popuptext" id="myPopup"><ul><li>Atleast a Uppercase Letter</li><li>Atleast a Lowercase Letter</li><li>Min 8 chars and Max 12 chars</li></ul></span>
                     </div>
-                    <input type="password" placeholder="Password" id="pass" onClick={this.popupFunction}></input>
+                    <input type="password" placeholder="Password" id="pass" onClick={this.popupFunction} onFocus={this.popupFunction}></input>
                     <br></br>
                     <input type="text" placeholder="Email" id="email"></input>
                     <input type="text" placeholder="Phone no." id="phone"></input>

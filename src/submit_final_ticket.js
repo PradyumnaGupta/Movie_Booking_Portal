@@ -10,8 +10,11 @@ const submitFinalTicket=function(user,movie,audi,slot,day,seats,res){
 
     db.get(`SELECT Slot_${new Array("A","B","C")[JSON.parse(slot)-1]} FROM auditoriums WHERE Auditorium="${audi}"`,
     (error,row)=>{
-        if(error)
-        console.log(error);
+        if(error){
+            console.log(error);
+            res.status(500).send();
+            return;
+        }
 
         seats=JSON.parse(seats);
         row=JSON.parse(row[Object.keys(row)[0]]);
@@ -29,13 +32,25 @@ const submitFinalTicket=function(user,movie,audi,slot,day,seats,res){
             row[day]=arr;
 
             db.run(`UPDATE auditoriums SET Slot_${new Array("A","B","C")[JSON.parse(slot)-1]}="${JSON.stringify(row)}" WHERE Auditorium="${audi}" `,
-            (error)=>{if(error) console.log(error)});
+            (error)=>{
+                if(error){
+                    console.log(error)
+                    res.status(500).send();
+                    return;  
+                } 
+            });
             
             let date=new Date();
             date.setDate(date.getDate()+day);
             date=`${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`;
             
             db.get(`SELECT Ticket_Details FROM booked_tickets WHERE Username="${user}"`,(error,row)=>{
+                if(error){
+                    console.log(error);
+                    res.status(500).send();
+                    return;
+                }
+
                 let current_ticket={
                     Date:date,
                     Movie:movie,
