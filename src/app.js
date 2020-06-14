@@ -7,7 +7,7 @@ const checkMatchingTickets=require('./check_matching_tickets.js');
 const getMoviesInfo=require('./get_movies_info.js');
 const getSeats=require('./get_seats.js');
 const submitFinalTicket=require('./submit_final_ticket.js');
-const removeShow=require("./remove_show");
+const removeShow=require('./remove_show');
 const addShow=require('./add_show.js');
 const dailyAudiTableUpdate=require('./daily_auditable_update.js');
 

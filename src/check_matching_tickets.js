@@ -10,7 +10,6 @@ const checkMatchingTickets=function(user,res){
             res.status(500).send();
             return;
         }
-        
         if(rows)
         res.send(rows.Ticket_Details);
         else res.status(204).send("[]");

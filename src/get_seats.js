@@ -12,7 +12,7 @@ const getSeats=function(audi,slot,day,res){
         }
         
         day=parseInt(day);
-        day=(day<today)?(7-today+day):(day-today);
+        day=(day<today)?(7-today+day):(day-today);//converting weekday to 0/1/2
         seats=JSON.parse(seats[Object.keys(seats)[0]])[day];
         res.send(JSON.stringify(seats));
     });

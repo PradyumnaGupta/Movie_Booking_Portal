@@ -6,7 +6,7 @@ const submitFinalTicket=function(user,movie,audi,slot,day,seats,res){
 
     let today=new Date().getDay();
     day=parseInt(day);
-    day=(day<today)?(7-today+day):(day-today);
+    day=(day<today)?(7-today+day):(day-today);//converting weekday to 0/1/2
 
     db.get(`SELECT Slot_${new Array("A","B","C")[JSON.parse(slot)-1]} FROM auditoriums WHERE Auditorium="${audi}"`,
     (error,row)=>{

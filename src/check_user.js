@@ -4,7 +4,7 @@ const checkUser=function(user,pass,res){
     const db=require("./database_initializer.js");
     const passwordHash=require("password-hash");
 
-    if(user==="admin@amazon"&&pass==="admin@123"){
+    if(user==="*******"&&pass==="*******"){
         res.send("Admin");
         return;
     }

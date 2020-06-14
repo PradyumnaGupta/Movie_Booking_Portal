@@ -19,7 +19,7 @@ const emailTicket=function(user,seats,movie,slot,audi,date){
             service:'gmail',
             auth: {
                 user: 'moviebookingportal@gmail.com',
-                pass: 'movie@123'
+                pass: '*******'
             }
         });
         process.stdout.write("sending mail...");
@@ -27,7 +27,7 @@ const emailTicket=function(user,seats,movie,slot,audi,date){
             from: 'moviebookingportal@outlook.com', 
             to: row.Email, 
             subject: 'Ticket Booked', 
-            text: `Dear ${row.Username}, The details for your ticket are as follows:\n MOVIE : ${movie} \n Auditorium:Auditorium ${audi} \n Date: ${date} \n Time : ${slot} \n Seats : ${seats} `
+            text: `Dear ${row.Username}, The details for your ticket are as follows:\n \n MOVIE : ${movie} \n Auditorium:Auditorium ${audi} \n Date: ${date} \n Time : ${slot} \n Seats : ${seats} `
         };
         transporter.sendMail(mailOptions, function(error, info){
             if(error){
