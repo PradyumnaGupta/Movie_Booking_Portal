@@ -1,28 +1,21 @@
 
+const Users=require("../Databases/users_collection.js");
+const passwordHash=require("password-hash");
+
 const checkUser=function(user,pass,res){
-    
-    const db=require("./database_initializer.js");
-    const passwordHash=require("password-hash");
+    Users.findOne({
+        Username:user
+    }).then((doc)=>{
 
-    if(user==="*******"&&pass==="*******"){
-        res.send("Admin");
-        return;
-    }
-
-    db.get('SELECT * FROM users WHERE Username=$user',{
-        $user:user,
-    },(error,row)=>{
-        if(error){
-            console.log(error);
-            res.status(500).send();
-            return;
+        if(doc&&doc.Username===user&&passwordHash.verify(pass,doc.Password)){
+            if(doc.Admin===true)
+            res.status(200).send("Admin");
+            else 
+            res.status(200).send("Authentication Successful");
         }
-        
-        if(row&&row.Username===user&&passwordHash.verify(pass,row.Password))
-        res.send("Authentication Successful");
-        
         else res.status(404).send();
     });
+
 }
 
 module.exports=checkUser;

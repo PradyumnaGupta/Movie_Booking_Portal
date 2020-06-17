@@ -1,5 +1,5 @@
 
-const url="http://ac77f4d5092c.ngrok.io";
+const url="http://cbd4b81f45c0.ngrok.io";
 sessionStorage.setItem("url",url);
 
 class RenderLRButtons extends React.Component{
@@ -119,7 +119,7 @@ class RenderUserHistory extends React.Component{
     }
 
     render(){
-        const user_history=this.props.data.slice(0).reverse().map((val)=>{
+        const user_history=this.props.data.slice(0).reverse().map((val)=>{  
             return (
                 <tr>
                     <td>{val.Date}</td>
@@ -201,10 +201,10 @@ class RenderAdminForm extends React.Component{
             )
         });
         const adder=()=>{
-            let new_audi=document.getElementById("new_audi").value;
-            let new_movie=document.getElementById("new_movie").value;
-            let new_poster=document.getElementById("new_poster").value;
-            if(new_audi==="Add an auditorium") new_audi=document.getElementById("add_audi").value;
+            let new_audi=DOMPurify.sanitize(document.getElementById("new_audi").value, {SAFE_FOR_TEMPLATES: true});
+            let new_movie=DOMPurify.sanitize(document.getElementById("new_movie").value, {SAFE_FOR_TEMPLATES: true});
+            let new_poster=DOMPurify.sanitize(document.getElementById("new_poster").value, {SAFE_FOR_TEMPLATES: true});
+            if(new_audi==="Add an auditorium") new_audi=DOMPurify.sanitize(document.getElementById("add_audi").value, {SAFE_FOR_TEMPLATES: true});
             addMovie(new_movie,new_audi,new_poster);
             ReactDOM.render(<RenderAdminForm/>,document.getElementById("main"));
         };

@@ -12,6 +12,7 @@ class RenderMessage extends React.Component {
 
 class RenderSeats extends React.Component {
     static selected_seats=[];
+    static user_earlier_bookings=[];
 
     static hideBookedSeats=function(){
         for(let i=1;i<=50;i++){
@@ -20,6 +21,16 @@ class RenderSeats extends React.Component {
         }
     }
     
+    seats_initialize=function(){
+        let history=JSON.parse(sessionStorage.getItem("user_history"));
+        history.forEach((val) => {
+            let show_day=new Date(parseInt(val.Date.split('-')[2]),parseInt(val.Date.split('-')[1])-1,parseInt(val.Date.split('-')[0])+1).getDay()-1;
+            if(show_day===parseInt(sessionStorage.getItem("day"))&&val.Audi.substr(-1)===sessionStorage.getItem("audi")&&val.Slot===["9 AM","2 PM","7 PM"][parseInt(sessionStorage.getItem("slot"))-1])
+            RenderSeats.user_earlier_bookings.push(...val.Seats);
+        });
+        console.log(RenderSeats.user_earlier_bookings);
+    }
+
     modifySeat=function(event){
         let val=parseInt(event.target.id);
         if(RenderSeats.selected_seats.indexOf(val)!=-1)
@@ -29,7 +40,7 @@ class RenderSeats extends React.Component {
     
     static on_submit=(event)=>{
         event.preventDefault();
-        if(RenderSeats.selected_seats.length>6){
+        if((RenderSeats.selected_seats.length+RenderSeats.user_earlier_bookings.length)>6){
             ReactDOM.render(<RenderMessage message="You can't select more than 6 seats." color="red"/>,document.getElementById("message_placeholder"));
             return;
         }
@@ -45,7 +56,7 @@ class RenderSeats extends React.Component {
                 ReactDOM.render(<RenderMessage message="Congratulations,your seats have been booked !! Please check your mail for the ticket." color="black"/>,document.getElementById("message_placeholder"));
             }
             else {
-                ReactDOM.render(<RenderMessage message="Sorry these sets were booked just now. Please select seats again !!" color="black"/>,document.getElementById("message_placeholder"));
+                ReactDOM.render(<RenderMessage message="Sorry these sets were booked just now by somebody else. Please select seats again !!" color="black"/>,document.getElementById("message_placeholder"));
             }
             retrieveAvailableSeats(sessionStorage.getItem("audi"),sessionStorage.getItem("slot"),sessionStorage.getItem("day"));//sets 'availableSeats' array   
             ReactDOM.render(<RenderSeats/>,document.getElementById("main_body"));
@@ -56,6 +67,7 @@ class RenderSeats extends React.Component {
     }
 
     render(){
+        this.seats_initialize();
         const seatmatrix=[];
         const n_rows=5;
         const n_columns=10;
@@ -89,6 +101,7 @@ class RenderSeats extends React.Component {
 //main
 
 retrieveAvailableSeats(sessionStorage.getItem("audi"),sessionStorage.getItem("slot"),sessionStorage.getItem("day"));//sets 'availableSeats' array   
+
 console.log(availableSeats);
 
 ReactDOM.render(<RenderSeats/>,document.getElementById("main_body"));

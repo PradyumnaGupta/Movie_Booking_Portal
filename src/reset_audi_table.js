@@ -1,17 +1,23 @@
 
-const db=require("./database_initializer.js");
+const Auditoriums=require("../Databases/auditoriums_collection.js");
 
-let seats=[],row=[];
+let new_seats_matrix=[],seats=[];
 for(let i=1;i<=50;i++){
-    row.push(i);
+    seats.push(i);
 }
 
-seats.push(row);
-seats.push(row);
-seats.push(row);
+new_seats_matrix.push(seats);
+new_seats_matrix.push(seats);
+new_seats_matrix.push(seats);
 
-db.run(`UPDATE auditoriums SET SLOT_A="${JSON.stringify(seats)}",SLOT_B="${JSON.stringify(seats)}",SLOT_C="${JSON.stringify(seats)}"`,
-    (error)=>{
-        if(error)
-        console.log(error);
-    });
+Auditoriums.updateMany(
+    {},
+    {
+        Slot_A:new_seats_matrix,
+        Slot_B:new_seats_matrix,
+        Slot_C:new_seats_matrix
+    },
+    {multi:true}
+).catch((error)=>{
+    console.log(error);
+});

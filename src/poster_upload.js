@@ -24,9 +24,9 @@ const posterUpload=function(url){
         console.log(error);
 
         cloudinary.config({
-            cloud_name:'*****',
-            api_key:'*******',
-            api_secret:'********'});
+            cloud_name:'dd6t4mafh',
+            api_key:'246876465761746',
+            api_secret:'8sNtg50GX-6bAQuI0LFlr-Wns8o'});
 
         cloudinary.v2.uploader.upload(output_name,(error,result)=>{final_url=result.url});
             

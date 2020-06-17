@@ -1,12 +1,17 @@
 function createUser (){
-    const username=document.getElementById("user").value;
-    const password=document.getElementById("pass").value;
-    const email=document.getElementById("email").value;
-    const phone=document.getElementById("phone").value;
+    const username=DOMPurify.sanitize(document.getElementById("user").value, {SAFE_FOR_TEMPLATES: true});
+    const password=DOMPurify.sanitize(document.getElementById("pass").value, {SAFE_FOR_TEMPLATES: true});
+    const email=DOMPurify.sanitize(document.getElementById("email").value, {SAFE_FOR_TEMPLATES: true});
+    const phone=DOMPurify.sanitize(document.getElementById("phone").value, {SAFE_FOR_TEMPLATES: true});
 
     if(!username||!password||!email||!phone){
         alert("Please fill all the fields");
         return ;
+    }
+
+    if(!(/^[A-Za-z]+$/.test(username))){
+        alert("Username can't contain special characters.")
+        return;
     }
 
     if(!(/^(?=.*[a-z])(?=.*[A-Z]).{8,12}$/.test(password))){

@@ -1,17 +1,14 @@
+const Movies=require("../Databases/movies_collection.js");
 
 const getMoviesInfo=function(res){
-    
-    const db=require("./database_initializer.js");
 
-    db.all("SELECT * FROM movies",(error,rows)=>{
-        if(error){
-            console.log(error);
-            res.status(500).send();
-            return;
-        }
+    Movies.find({}).then((doc)=>{
+        //console.log(doc);
+        res.status(200).send(doc)
+    }).catch((error)=>{
+        res.status(500).send();
+    });
 
-        res.send(rows);
-    })
 }
 
 module.exports=getMoviesInfo;

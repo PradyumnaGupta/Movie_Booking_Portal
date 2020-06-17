@@ -16,11 +16,13 @@
     "cloudinary": "^1.21.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mongoose": "^5.9.19",
     "ngrok": "^3.2.7",
     "nodemailer": "^6.4.6",
     "nodemon": "^2.0.4",
     "password-hash": "^1.2.2",
     "sqlite3": "^4.2.0",
+    "validator": "^13.1.1",
     "webp-converter": "^2.2.3"
   }
 }

@@ -1,5 +1,6 @@
 const express=require('express');
 const cors = require('cors');
+const mongoose=require('mongoose');
 
 const addUser=require('./add_user.js');
 const checkUser=require('./check_user.js');
@@ -10,6 +11,10 @@ const submitFinalTicket=require('./submit_final_ticket.js');
 const removeShow=require('./remove_show');
 const addShow=require('./add_show.js');
 const dailyAudiTableUpdate=require('./daily_auditable_update.js');
+
+mongoose.connect("mongodb://127.0.0.1:27017/MBP")
+.then(()=>{console.log("Connected to Database...")})
+.catch((error)=>{console.log(error)});
 
 const app=express();
 const Port=4002;

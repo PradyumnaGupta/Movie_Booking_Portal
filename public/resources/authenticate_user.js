@@ -1,6 +1,6 @@
 function authenticateUser (){
-    const username=document.getElementById("user").value;
-    const password=document.getElementById("pass").value;
+    const username=DOMPurify.sanitize(document.getElementById("user").value, {SAFE_FOR_TEMPLATES: true});
+    const password=DOMPurify.sanitize(document.getElementById("pass").value, {SAFE_FOR_TEMPLATES: true});
 
     if(!username||!password){
         alert("Please provide both username and password");

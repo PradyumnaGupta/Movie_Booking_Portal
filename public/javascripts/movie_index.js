@@ -122,7 +122,9 @@ class RenderMovieDetails extends React.Component{
 
     render(){
         let weekdays=new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
-        let today=new Date().getDay();
+        let today=new Date();
+        let tommorow=new Date(); tommorow.setDate(tommorow.getDate()+1);
+        let day_after_tommorow=new Date(); day_after_tommorow.setDate(day_after_tommorow.getDate()+2);
         let auditoriums=[];
         sessionStorage.setItem("slot","none");
         for(let i=0;i<this.props.data.length;i++)
@@ -138,9 +140,9 @@ class RenderMovieDetails extends React.Component{
             <div>
             <select id="Date-Buttons" onChange={(e)=>{document.getElementById(`inner ${this.props.movie}`).style.display="table";document.getElementById(`show_select ${this.props.movie}`).style.display="block";sessionStorage.setItem("day",weekdays.indexOf(e.target.value));this.activateSlot();this.alertFastFillingSeats();}}>
                 <option value="" disabled selected>Select a day</option>
-                <option id="d1">{weekdays[today]}</option>
-                <option id="d2">{weekdays[(today+1)%7]}</option>
-                <option id="d3">{weekdays[(today+2)%7]}</option>
+                <option id="d1">{weekdays[today.getDay()]}-{today.getDate()}/{today.getMonth()}/{today.getFullYear()}</option>
+                <option id="d2">{weekdays[(today.getDay()+1)%7]}-{tommorow.getDate()}/{tommorow.getMonth()}/{tommorow.getFullYear()}</option>
+                <option id="d3">{weekdays[(today.getDay()+2)%7]}-{day_after_tommorow.getDate()}/{day_after_tommorow.getMonth()}/{day_after_tommorow.getFullYear()}</option>
             </select>
             <table id={`inner ${this.props.movie}`} class="inner" style={{display:"none"}}>
             {auditoriums}
