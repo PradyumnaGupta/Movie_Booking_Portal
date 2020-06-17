@@ -2,6 +2,10 @@ const express=require('express');
 const cors = require('cors');
 const mongoose=require('mongoose');
 
+mongoose.connect("mongodb://127.0.0.1:27017/MBP")
+.then(()=>{console.log("Connected to Database...")})
+.catch((error)=>{console.log(error)});
+
 const addUser=require('./add_user.js');
 const checkUser=require('./check_user.js');
 const checkMatchingTickets=require('./check_matching_tickets.js');
@@ -12,12 +16,14 @@ const removeShow=require('./remove_show');
 const addShow=require('./add_show.js');
 const dailyAudiTableUpdate=require('./daily_auditable_update.js');
 
-mongoose.connect("mongodb://127.0.0.1:27017/MBP")
+/*mongoose.connect("mongodb://127.0.0.1:27017/MBP")
 .then(()=>{console.log("Connected to Database...")})
-.catch((error)=>{console.log(error)});
+.catch((error)=>{console.log(error)});*/
 
 const app=express();
 const Port=4002;
+
+app.use(require('express-status-monitor')());
 
 app.use(cors());
 

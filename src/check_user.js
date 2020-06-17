@@ -6,7 +6,7 @@ const checkUser=function(user,pass,res){
     Users.findOne({
         Username:user
     }).then((doc)=>{
-
+        
         if(doc&&doc.Username===user&&passwordHash.verify(pass,doc.Password)){
             if(doc.Admin===true)
             res.status(200).send("Admin");
@@ -14,6 +14,8 @@ const checkUser=function(user,pass,res){
             res.status(200).send("Authentication Successful");
         }
         else res.status(404).send();
+    }).catch((error)=>{
+        console.log(error);
     });
 
 }

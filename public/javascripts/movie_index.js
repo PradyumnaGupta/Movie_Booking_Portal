@@ -138,7 +138,7 @@ class RenderMovieDetails extends React.Component{
         ));
         return(
             <div>
-            <select id="Date-Buttons" onChange={(e)=>{document.getElementById(`inner ${this.props.movie}`).style.display="table";document.getElementById(`show_select ${this.props.movie}`).style.display="block";sessionStorage.setItem("day",weekdays.indexOf(e.target.value));this.activateSlot();this.alertFastFillingSeats();}}>
+            <select id="Date-Buttons" onChange={(e)=>{document.getElementById(`inner ${this.props.movie}`).style.display="table";document.getElementById(`show_select ${this.props.movie}`).style.display="block";sessionStorage.setItem("day",weekdays.indexOf(e.target.value.split('-')[0]));this.activateSlot();this.alertFastFillingSeats();}}>
                 <option value="" disabled selected>Select a day</option>
                 <option id="d1">{weekdays[today.getDay()]}-{today.getDate()}/{today.getMonth()}/{today.getFullYear()}</option>
                 <option id="d2">{weekdays[(today.getDay()+1)%7]}-{tommorow.getDate()}/{tommorow.getMonth()}/{tommorow.getFullYear()}</option>

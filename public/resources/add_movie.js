@@ -9,7 +9,12 @@ const addMovie=function(new_movie,new_audi,new_poster){
         alert("No special characters allowed in auditorium name.");
         return;
     }
-    
+
+    if(!(/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/.test(new_poster))){
+        alert("Please enter a valid url.");
+        return;
+    }
+
     const server=sessionStorage.getItem("url");//ipconfigiserver-url
     const endpoint=server+`/movies/?movie=${new_movie}&audi=${new_audi}&poster_src=${new_poster}`;
     const xhr=new XMLHttpRequest();

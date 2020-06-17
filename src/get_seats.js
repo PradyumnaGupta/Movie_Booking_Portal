@@ -7,12 +7,12 @@ const getSeats=function(audi,slot,day,res){
     Auditoriums.findOne({
         Auditorium:audi,
     }).then((doc)=>{
-        //console.log(doc);
+
         day=parseInt(day);
         day=(day<today)?(7-today+day):(day-today);//converting weekday to 0/1/2
         
         let seats=doc[`Slot_${new Array("A","B","C")[JSON.parse(slot)-1]}`][day];
-        
+
         res.status(200).send(JSON.stringify(seats));
 
     }).catch((error)=>{

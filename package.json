@@ -16,6 +16,7 @@
     "cloudinary": "^1.21.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-status-monitor": "^1.3.3",
     "mongoose": "^5.9.19",
     "ngrok": "^3.2.7",
     "nodemailer": "^6.4.6",
