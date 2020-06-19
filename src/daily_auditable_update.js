@@ -3,8 +3,10 @@ const Auditoriums=require("../Databases/auditoriums_collection.js");
 const dailyAudiTableUpdate=function(){
     console.log("Performing daily table update ....")
 
+    let total_seats=50;
     let new_seats=[],new_seats_matrix;
-    for(let i=1;i<=50;i++){
+    
+    for(let i=1;i<=total_seats;i++){
         new_seats.push(i);
     }
 

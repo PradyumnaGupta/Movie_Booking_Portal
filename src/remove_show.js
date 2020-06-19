@@ -2,17 +2,19 @@ const Auditoriums=require("../Databases/auditoriums_collection.js");
 const Movies=require("../Databases/movies_collection.js");
 const Booked_Tickets=require("../Databases/booked_tickets_collection.js");
 
-let state={movie:"",audi:"",day:"",month:""};//initializing state
+//Here state is used to check if the request repeated for the removal of same movie which means user has confirmed deletion
+let state={movie:"",audi:"",day:"",month:""};//initializing state 
 
 const removeShow=function(movie,audi,res){
 
-    let matchingTicketFound=false;
+    let matchingTicketFound=false;//flag for if a ticket is found booked against the movie admin wants to remove
 
     let today=new Date();
     today.setDate(today.getDate()-1);
     today.setHours(23);
     today.setMinutes(59);
 
+    //state being checked so that after the first time warning ,the second time movie gets deleted
     if(!(state.movie===movie&&state.audi===audi&&state.day===today.getDate()&&state.month===(today.getMonth()))){
         
         Booked_Tickets.find({}).then((docs)=>{
@@ -21,7 +23,7 @@ const removeShow=function(movie,audi,res){
                     //console.log(val);
                     let date_show=val.Date.split('-');
                     if(((new Date(parseInt(date_show[2]),parseInt(date_show[1])-1,parseInt(date_show[0])+1,0).getTime())>=(today.getTime()))&&(val.Audi===audi.slice(-1))&&(val.Movie===movie)){
-                        res.send("ERROR");
+                        res.send("ERROR");//if any booking found send warning
                         matchingTicketFound=true;
                         return false;
                     }
@@ -29,7 +31,7 @@ const removeShow=function(movie,audi,res){
                 })
                 return !matchingTicketFound;
                 });
-            if(!matchingTicketFound){
+            if(!matchingTicketFound){//no booking found , delete movie
                 
                 Movies.findOneAndRemove({
                     Audi:audi
@@ -44,7 +46,7 @@ const removeShow=function(movie,audi,res){
         });
     }
 
-    else {
+    else {//second request after first time warning , delete movie
         Movies.findOneAndRemove({
             Audi:audi
         }).catch(error=>{console.log(error)});

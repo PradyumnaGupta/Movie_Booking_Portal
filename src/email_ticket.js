@@ -14,12 +14,12 @@ const emailTicket=function(user,seats,movie,slot,audi,date){
             service:'gmail',
             auth: {
                 user: 'moviebookingportal@gmail.com',
-                pass: 'movie@123'
+                pass: '******'
             }
         });
         process.stdout.write("sending mail...");
         let mailOptions = {
-            from: 'moviebookingportal@outlook.com', 
+            from: 'moviebookingportal@gmail.com', 
             to: doc.Email, 
             subject: 'Ticket Booked', 
             text: `Dear ${doc.Username}, The details for your ticket are as follows:\n \n MOVIE : ${movie} \n Auditorium:Auditorium ${audi} \n Date: ${date} \n Time : ${slot} \n Seats : ${seats} `

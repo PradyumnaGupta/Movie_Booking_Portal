@@ -9,7 +9,7 @@ const submitFinalTicket=function(user,movie,audi,slot,day,seats,res){
     day=parseInt(day);
     day=(day<today)?(7-today+day):(day-today);//converting weekday to 0/1/2
 
-    Auditoriums.findOne({
+    Auditoriums.findOne({//check for requested show
         Auditorium:audi
     }).then((doc)=>{
         seats=JSON.parse(seats);
@@ -27,6 +27,7 @@ const submitFinalTicket=function(user,movie,audi,slot,day,seats,res){
 
             available_seats_matrix[day]=available_seats;
 
+            //update database for removing booked ticket
             if((JSON.parse(slot)-1)===0) 
             Auditoriums.findOneAndUpdate({Auditorium:audi},{Slot_A:available_seats_matrix},{new:true,runValidators:true}).catch(error=>{console.log(error)});
             else if ((JSON.parse(slot)-1)===1)
@@ -38,7 +39,7 @@ const submitFinalTicket=function(user,movie,audi,slot,day,seats,res){
             date.setDate(date.getDate()+day);
             date=`${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`;
 
-            Booked_Tickets.findOne({
+            Booked_Tickets.findOne({//update booked_tickets table with user's ticket
                 Username:user
             }).then((doc)=>{
                 let new_ticket={
@@ -79,6 +80,7 @@ const submitFinalTicket=function(user,movie,audi,slot,day,seats,res){
 
             res.status(200).send("OK");
 
+            //email user with ticket information
             emailTicket(user,seats,movie,new Array("9 AM","2 PM","7 PM")[JSON.parse(slot)-1],audi,date);
         }
     });

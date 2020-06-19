@@ -1,6 +1,7 @@
 const express=require('express');
 const cors = require('cors');
 const mongoose=require('mongoose');
+const status_monitor=require('express-status-monitor');
 
 mongoose.connect("mongodb://127.0.0.1:27017/MBP")
 .then(()=>{console.log("Connected to Database...")})
@@ -19,7 +20,7 @@ const dailyAudiTableUpdate=require('./daily_auditable_update.js');
 const app=express();
 const Port=4002;
 
-app.use(require('express-status-monitor')());
+app.use(status_monitor());
 
 app.use(cors());
 
@@ -57,6 +58,7 @@ app.delete("/movies/",(req,res,next)=>{
     removeShow(req.query.movie,req.query.audi,res);
 });
 
+//daily seats update at 12AM
 setTimeout(dailyAudiTableUpdate,(new Date((new Date().getFullYear()),(new Date().getMonth()),(new Date().getDate()),24,0).getTime())-(new Date().getTime()));
 
 app.listen(Port,()=>{

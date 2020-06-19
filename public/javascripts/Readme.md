@@ -1,0 +1,2 @@
+
+Since import statements in client-side javascript are not supported by most of the browsers and to import files we need to add them as scripts in the page HTML, all the react component classes for the three pages have been kept in react_home_index.js,react_movie_index.js and react_seats_index.js respectively and not bifurcated in separate files for the sake of convenience. All the other APIs/functions being used by the above scripts are separated and have been kept in the resources folder.
