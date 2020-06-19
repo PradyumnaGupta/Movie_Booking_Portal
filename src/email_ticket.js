@@ -1,17 +1,12 @@
 
+const Users=require("../Databases/users_collection.js");
+const nodemailer = require('nodemailer');
+
 const emailTicket=function(user,seats,movie,slot,audi,date){
-
-    const db=require("./database_initializer.js");
     
-    db.get("SELECT * FROM users WHERE Username=$user",{
-        $user:user
-    },(error,row)=>{
-
-        if(error){
-            console.log(error);
-        }
-
-        const nodemailer = require('nodemailer');
+    Users.findOne({
+        Username:user
+    }).then((doc)=>{
         let transporter = nodemailer.createTransport({
             //host: 'smtp.gmail.com',
             //port: 465,
@@ -25,9 +20,9 @@ const emailTicket=function(user,seats,movie,slot,audi,date){
         process.stdout.write("sending mail...");
         let mailOptions = {
             from: 'moviebookingportal@outlook.com', 
-            to: row.Email, 
+            to: doc.Email, 
             subject: 'Ticket Booked', 
-            text: `Dear ${row.Username}, The details for your ticket are as follows:\n \n MOVIE : ${movie} \n Auditorium:Auditorium ${audi} \n Date: ${date} \n Time : ${slot} \n Seats : ${seats} `
+            text: `Dear ${doc.Username}, The details for your ticket are as follows:\n \n MOVIE : ${movie} \n Auditorium:Auditorium ${audi} \n Date: ${date} \n Time : ${slot} \n Seats : ${seats} `
         };
         transporter.sendMail(mailOptions, function(error, info){
             if(error){
@@ -37,6 +32,8 @@ const emailTicket=function(user,seats,movie,slot,audi,date){
             return;
         });
         console.log("done");
+    }).catch((error)=>{
+        console.log(error);
     })
 };
 

@@ -1,6 +1,6 @@
 
 const retreiveBookingHistory=function(){
-    const server=url;
+    const server=sessionStorage.getItem("url");
     const endpoint=server+`/user/bookings/?user=${sessionStorage.getItem("Username")}`;
     const xhr=new XMLHttpRequest();
     //xhr.responseType='json';

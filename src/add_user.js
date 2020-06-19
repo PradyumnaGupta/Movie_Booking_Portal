@@ -5,7 +5,7 @@ const addUser=function(user,pass,email,phone,res) {
 
     const passwordHash=require("password-hash");
     
-    let hashedPassword = passwordHash.generate(pass);
+    let hashedPassword = passwordHash.generate(pass,{algorithm:'sha256'});
 
     let newUser=new Users({
         Username:user,

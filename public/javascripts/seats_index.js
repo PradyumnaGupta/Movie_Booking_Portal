@@ -22,9 +22,12 @@ class RenderSeats extends React.Component {
     }
     
     seats_initialize=function(){
+        RenderSeats.user_earlier_bookings=[];
+        retreiveBookingHistory();
         let history=JSON.parse(sessionStorage.getItem("user_history"));
         history.forEach((val) => {
             let show_day=new Date(parseInt(val.Date.split('-')[2]),parseInt(val.Date.split('-')[1])-1,parseInt(val.Date.split('-')[0])+1).getDay()-1;
+            show_day=(show_day>0)?show_day:6;
             if(show_day===parseInt(sessionStorage.getItem("day"))&&val.Audi.substr(-1)===sessionStorage.getItem("audi")&&val.Slot===["9 AM","2 PM","7 PM"][parseInt(sessionStorage.getItem("slot"))-1])
             RenderSeats.user_earlier_bookings.push(...val.Seats);
         });
@@ -107,7 +110,6 @@ console.log(availableSeats);
 ReactDOM.render(<RenderSeats/>,document.getElementById("main_body"));
 
 RenderSeats.hideBookedSeats();
-
 
 const submit_button=document.getElementById("submit");
 submit_button.addEventListener("click",RenderSeats.on_submit);
