@@ -17,7 +17,6 @@ const checkUser=function(user,pass,res){
     }).catch((error)=>{
         console.log(error);
     });
-
 }
 
 module.exports=checkUser;

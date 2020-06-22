@@ -13,6 +13,8 @@
   "author": "Pradyumna Gupta",
   "license": "ISC",
   "dependencies": {
+    "@wdio/cli": "^6.1.19",
+    "chai": "^4.2.0",
     "cloudinary": "^1.21.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -23,7 +25,16 @@
     "nodemon": "^2.0.4",
     "password-hash": "^1.2.2",
     "sqlite3": "^4.2.0",
+    "supertest": "^4.0.2",
     "validator": "^13.1.1",
     "webp-converter": "^2.2.3"
+  },
+  "devDependencies": {
+    "@wdio/local-runner": "^6.1.19",
+    "@wdio/mocha-framework": "^6.1.19",
+    "@wdio/spec-reporter": "^6.1.14",
+    "@wdio/sync": "^6.1.14",
+    "chromedriver": "^83.0.0",
+    "wdio-chromedriver-service": "^6.0.3"
   }
 }

@@ -26,10 +26,12 @@ const addMovie=function(new_movie,new_audi,new_poster){
         return;
     }
 
-    if((JSON.parse(sessionStorage.getItem("movie_list"))).find((val)=>{return new_movie===val.Movie_name}).Movie_name===new_movie){
-        alert("Sorry this movie is already in the house.");
-        return;
-    }
+    try{
+        if((JSON.parse(sessionStorage.getItem("movie_list"))).find((val)=>{return new_movie===val.Movie_name}).Movie_name===new_movie){
+            alert("Sorry this movie is already in the house.");
+            return;
+        }
+    }catch(error){/*do nothing , skip*/}
 
     const server=sessionStorage.getItem("url");//ipconfigiserver-url
     const endpoint=server+`/movies/?movie=${new_movie}&audi=${new_audi}&poster_src=${new_poster}`;

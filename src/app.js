@@ -64,3 +64,5 @@ setTimeout(dailyAudiTableUpdate,(new Date((new Date().getFullYear()),(new Date()
 app.listen(Port,()=>{
     console.log(`Listening at port ${Port}`);
 });
+
+module.exports=app;

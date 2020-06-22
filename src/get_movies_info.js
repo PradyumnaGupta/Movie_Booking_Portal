@@ -8,7 +8,6 @@ const getMoviesInfo=function(res){
     }).catch((error)=>{
         res.status(500).send();
     });
-
 }
 
 module.exports=getMoviesInfo;

@@ -14,7 +14,7 @@ const emailTicket=function(user,seats,movie,slot,audi,date){
             service:'gmail',
             auth: {
                 user: 'moviebookingportal@gmail.com',
-                pass: '******'
+                pass: 'movie@123'
             }
         });
         process.stdout.write("sending mail...");

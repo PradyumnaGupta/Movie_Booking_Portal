@@ -97,9 +97,11 @@ class RenderRegisterFields extends React.Component{
 
 class RenderForwardButtons extends React.Component{
     render(){
+        document.getElementById("logout").style.display="block";
+        document.getElementById("logout").addEventListener('click',()=>{sessionStorage.setItem("authenticated","false");window.location.href="../home.htm";});
         return (
             <div id="forward-buttons">
-                <span style={{cursor:"pointer",textDecoration:"underline"}} onClick={()=>{sessionStorage.setItem("authenticated","false");window.location.reload();}}>Hey {sessionStorage.getItem('Username')}</span>
+                <span id="greeting" style={{cursor:"pointer",textDecoration:"underline"}} onClick={()=>{sessionStorage.setItem("authenticated","false");window.location.reload();}}>Hey {sessionStorage.getItem('Username')}</span>
                 <br></br>
                 <button id="book-history" onClick={(e)=>{e.target.disabled=true;RenderUserHistory.getBookingHistory()}}>Booking History >></button>
                 <button id="book-your-movie" onClick={(e)=>{e.target.disabled=true;window.location.href="./movies.htm"}}>Book Your Show >></button>
