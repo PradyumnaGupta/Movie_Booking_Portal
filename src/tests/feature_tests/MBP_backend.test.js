@@ -5,13 +5,14 @@ const mongoose=require('mongoose');
 const Users=require('../../../Databases/users_collection.js');
 const Booked_Tickets=require('../../../Databases/booked_tickets_collection.js');
 const Movies=require('../../../Databases/movies_collection.js');
+const Auditoriums=require('../../../Databases/auditoriums_collection.js');
 
 mongoose.connect("mongodb://127.0.0.1:27017/MBP")
 .then(()=>{console.log("Connected to Database...")})
 .catch((error)=>{console.log(error)});
 
 describe("Back-End Testing",()=>{
-    it('Testing checkUser api', async ()=>{
+    it('Testing checkUser Api', async ()=>{
         let tempUsername='temporary';
         let tempPassword='Temporary';
 
@@ -25,7 +26,7 @@ describe("Back-End Testing",()=>{
             Username:tempUsername
         }).catch((error)=>{console.log(error)});
     })
-    it('Testing addUser api',async ()=>{
+    it('Testing addUser Api',async ()=>{
         let tempUsername='temp';
         let tempPassword='Temp@123';
         let tempEmail='temp@email.com';
@@ -35,7 +36,7 @@ describe("Back-End Testing",()=>{
         assert.equal(response.status,200);
     });
 
-    it("Testing checkMatchingTickets api",async ()=>{
+    it("Testing checkMatchingTickets Api",async ()=>{
         let tempUsername='temporary';
 
         Booked_Tickets.findOne({
@@ -48,19 +49,23 @@ describe("Back-End Testing",()=>{
         });    
     });
 
-    it("Testing getMoviesInfo api",async ()=>{
+    it("Testing getMoviesInfo Api",async ()=>{
         Movies.find({}).then(async (doc)=>{
             const response=await request("http://localhost:4002").get("/movies").send();
             assert.equal(JSON.parse(response.text),doc);
         });
     });
 
-    it("Testing getSeats api",async ()=>{
-        let tempAudi="A";
+    it("Testing getSeats Api",async ()=>{
+        let tempAudi;
         let tempSlot="1";
         let tempDay=new Date().getDay();
-        const response=await request("http://localhost:4002").get(`/movies/seats/?audi=${tempAudi}&slot=${tempSlot}&day=${tempDay}`);
-        assert.ok(JSON.parse(response.text).length<=50);
+
+        Auditoriums.find({}).then(async (docs)=>{
+            tempAudi=docs[0].Auditorium
+            const response=await request("http://localhost:4002").get(`/movies/seats/?audi=${tempAudi}&slot=${tempSlot}&day=${tempDay}`);
+            assert.ok(JSON.parse(response.text).length<=50);
+        });
     });
 
 });

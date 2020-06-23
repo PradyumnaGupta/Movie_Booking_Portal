@@ -7,6 +7,11 @@ function authenticateUser (){
         return ;
     }
     
+    if(!(/^[A-Za-z]+$/.test(username))){
+        alert("Username can't contain special characters.")
+        return;
+    }
+
     const server=sessionStorage.getItem("url");//server-url
     const endpoint=server+`/user/?username=${username}&password=${password}`;
     const xhr=new XMLHttpRequest();

@@ -69,7 +69,7 @@ class RenderMovies extends React.Component{
             );
         });
         return(
-            <div>
+            <div id="movieList">
                 <span id="ongoing_text">Currently Ongoing Movies...</span>
                 <br></br>
                 {movieList}

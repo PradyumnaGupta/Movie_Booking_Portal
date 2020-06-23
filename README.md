@@ -8,4 +8,4 @@ Frontend Files : public/
 
 Database Files : Databases/
 
-Design Document Link: https://quip-amazon.com/dBVIAPbwUrTD/Movie-Booking-Portal
+Design Document Link: https://quip-amazon.com/dBVIAPbwUrTD/Movie-Booking-Portal / https://w.amazon.com/bin/view/Main/Movie_Booking_Portal/

@@ -34,9 +34,11 @@ const dailyAudiTableUpdate=function(){
                     Auditorium:doc.Auditorium
                 },
                 {
-                    $set:{'Slot_A':doc.Slot_A},
-                    $set:{'Slot_B':doc.Slot_B},
-                    $set:{'Slot_C':doc.Slot_C}
+                    $set:{
+                        'Slot_A':doc.Slot_A,
+                        'Slot_B':doc.Slot_B,
+                        'Slot_C':doc.Slot_C
+                    },
                 },
                 {new:true,runValidators:true}
             ).catch((error)=>{console.log(error)});

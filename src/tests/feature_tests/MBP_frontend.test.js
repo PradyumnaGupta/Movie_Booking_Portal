@@ -1,7 +1,7 @@
 const {assert}=require("chai");
 const mongoose=require("mongoose");
 const Users=require("../../../Databases/users_collection.js");
-
+const Movies=require("../../../Databases/movies_collection.js");
 
 mongoose.connect("mongodb://127.0.0.1:27017/MBP")
 .then(()=>{console.log("Connected to Database...")})
@@ -118,6 +118,48 @@ describe("Front-End Testing",()=>{
             $('#submit').click();
             assert.equal(browser.getAlertText(),"Please enter a valid 10 digit phone number.");
             try{$('#logout').click();}catch(e){};
+        });
+    });
+
+    describe("Testing Movies Page",()=>{
+        it("Testing all movies availablity",()=>{
+            let tempUsername='temporary';
+            let tempPassword='Temporary';
+
+            browser.url('/');
+            $('#login-button').click();
+            $('#user').setValue(tempUsername);
+            $('#pass').setValue(tempPassword);
+            $('#submit').click();
+
+            $('#book-your-movie').click();
+            let movieList=$('#movieList').getText();
+
+            assert.ok(Movies.find({}).then(function (docs){
+                docs.forEach(function (val){
+                    assert.include(movieList,val.Movie_name);
+                });
+            }));
+        });
+
+    });
+
+    describe("Testing Seats Page",()=>{
+        it("Testing seat render",()=>{
+            let movieList=$('#movieList').getText();
+            
+            $(`#showdetails_${movieList.split('\n')[1]} .button`).click();
+            assert.include($("#Date-Buttons").getText(),"Select a day");
+
+            $("#Date-Buttons").selectByIndex(2);
+            assert.include($("table").getText(),"9 AM");
+            assert.include($("table").getText(),"2 PM");
+            assert.include($("table").getText(),"7 PM");
+
+            $(".A").click();
+            $(".show_select").click();
+
+            assert.ok($(`input`));
         });
     });
 });
