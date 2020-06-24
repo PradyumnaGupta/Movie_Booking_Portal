@@ -20,7 +20,7 @@ const dailyAudiTableUpdate=require('./daily_auditable_update.js');
 const app=express();
 const Port=4002;
 
-app.use(status_monitor());
+app.use(status_monitor({title:'Express Metrics'}));
 
 app.use(cors());
 

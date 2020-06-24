@@ -68,4 +68,20 @@ describe("Back-End Testing",()=>{
         });
     });
 
+    it("Testing addShow and removeShow Api",async ()=>{
+        let testMovie='testmovie';
+        let testAudi='testaudi';
+        let testPoster='testposter';
+
+        let response=await request("http://localhost:4002").get(`/movies/?movie=${testMovie}&audi=${testAudi}&poster_src=${testPoster}`);
+        assert.equal(response.status,200);
+
+        response=await request("http://localhost:4002").get(`/movies/?movie=${testMovie}&audi=${testAudi}`);
+        Movies.findOne({
+            Movie_name:testMovie
+        }).then((doc)=>{
+            assert.notOk(doc);
+        })
+        assert.equal(response.status,200);
+    })
 });

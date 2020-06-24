@@ -26,9 +26,12 @@ class RenderSeats extends React.Component {
         retreiveBookingHistory();
         let history=JSON.parse(sessionStorage.getItem("user_history"));
         history.forEach((val) => {
-            let show_day=new Date(parseInt(val.Date.split('-')[2]),parseInt(val.Date.split('-')[1])-1,parseInt(val.Date.split('-')[0])+1).getDay()-1;
-            show_day=(show_day>0)?show_day:6;
-            if(show_day===parseInt(sessionStorage.getItem("day"))&&val.Audi.substr(-1)===sessionStorage.getItem("audi")&&val.Slot===["9 AM","2 PM","7 PM"][parseInt(sessionStorage.getItem("slot"))-1])
+            let ticket_date=parseInt(val.Date.split('-')[0]);
+            let today=new Date().getDay();
+            let day=parseInt(sessionStorage.getItem("day"));
+            let show_date=new Date().getDate()+((day<today)?(7-today+day):(day-today));
+
+            if(ticket_date===show_date&&val.Audi.substr(-1)===sessionStorage.getItem("audi")&&val.Slot===["9 AM","2 PM","7 PM"][parseInt(sessionStorage.getItem("slot"))-1])
             RenderSeats.user_earlier_bookings.push(...val.Seats);
         });
         console.log(RenderSeats.user_earlier_bookings);
@@ -44,7 +47,7 @@ class RenderSeats extends React.Component {
     static on_submit=(event)=>{
         event.preventDefault();
         if((RenderSeats.selected_seats.length+RenderSeats.user_earlier_bookings.length)>6){
-            ReactDOM.render(<RenderMessage message="You can't select more than 6 seats." color="red"/>,document.getElementById("message_placeholder"));
+            ReactDOM.render(<RenderMessage message="You can't book more than 6 seats for a show." color="red"/>,document.getElementById("message_placeholder"));
             return;
         }
         else if(RenderSeats.selected_seats.length<=0){

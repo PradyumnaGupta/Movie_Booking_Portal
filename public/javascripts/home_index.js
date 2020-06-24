@@ -1,7 +1,7 @@
 
 //main
 
-const url="http://786df2791678.ngrok.io";//backend server address , currently using variable ngrok server address
+const url="http://8f653bd2ea75.ngrok.io";//backend server address , currently using variable ngrok server address
 sessionStorage.setItem("url",url);
 
 if(sessionStorage.getItem("authenticated")==="true"){
