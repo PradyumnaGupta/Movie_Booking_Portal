@@ -10,10 +10,10 @@ Database Files : Databases/
 
 [comment]: <> (Design Document Link: https://quip-amazon.com/dBVIAPbwUrTD/Movie-Booking-Portal / https://w.amazon.com/bin/view/Main/Movie_Booking_Portal/)
 
-_Movie Booking Portal_
+# _Movie Booking Portal_
 
-Wiki Link : https://w.amazon.com/bin/view/Main/Movie_Booking_Portal/
-Code Browser Package Link : https://code.amazon.com/packages/Movie_Booking_Portal/trees/heads/master
+[comment]: <> (Wiki Link : https://w.amazon.com/bin/view/Main/Movie_Booking_Portal/)
+[comment]: <> (Code Browser Package Link : https://code.amazon.com/packages/Movie_Booking_Portal/trees/heads/master)
 
 1. *Project Requirements*
 
@@ -48,11 +48,13 @@ Design and develop a movie booking portal for your city. The system should work 
 
 
 
-1. *Detailed Design*
+2. *Detailed Design*
 
 2.1 High Level Design Layout
 
-[Image: Untitled Diagram (29).png]The movie booking portal consists of 3 interfaces/pages:
+![](HLD.png)
+
+The movie booking portal consists of 3 interfaces/pages:
 
     * *Login Page*: 
         * The user on visiting the website will be given the option of “Login” and “Register” and the user can click the corresponding button, depending on whether he/she is registered or not. 
@@ -81,7 +83,9 @@ Apart from the above 3 pages available for the user , an operational metric page
 
 
 2.2 Sequence Diagram
-[Image: image]
+
+![](FLOW.png)
+
 2.3 APIs Used
  
 FrontEnd:
@@ -151,7 +155,8 @@ Limitations of current tech stack :
 
 There are 4  in total that will be maintained by the MongoDB database , namely Users Table, Booked Tickets Table, Auditoriums Table and Movies Table :
 
-[Image: Untitled Diagram (32).png]
+![](SCHEMA.png)
+
 2.6 Error Handling
 Following are the main errors which were identified in the portal and were ,thus, addressed later :
 
